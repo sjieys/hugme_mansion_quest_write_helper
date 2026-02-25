@@ -1,0 +1,13 @@
+
+
+.plus-item:hover {
+  background-color: #eee; /* hover 시 강조 */
+  color: #000;
+}
+
+
+.quest-item {
+  display: flex;         /* 가로 배치 */
+  gap: 10px;             /* 아이템 간격 */
+  align-items: center;   /* 세로 가운데 정렬 */
+}

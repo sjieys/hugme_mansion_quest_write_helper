@@ -1,0 +1,659 @@
+{
+  "categories": {
+    "세제": [
+      {
+        "id": "cleaning_detergent01",
+        "name": "Cleaning detergent01",
+        "img": "../assets/images/cleaning_detergent01.png",
+        "description": "치약 (세제 1레벨)"
+      },
+      {
+        "id": "cleaning_detergent02",
+        "name": "Cleaning detergent02",
+        "img": "../assets/images/cleaning_detergent02.png",
+        "description": "비누 (세제 2레벨)"
+      },
+      {
+        "id": "cleaning_detergent03",
+        "name": "Cleaning detergent03",
+        "img": "../assets/images/cleaning_detergent03.png",
+        "description": "핸드워시 (세제 3레벨)"
+      },
+      {
+        "id": "cleaning_detergent04",
+        "name": "Cleaning detergent04",
+        "img": "../assets/images/cleaning_detergent04.png",
+        "description": "유리세정제 (세제 4레벨)"
+      },
+      {
+        "id": "cleaning_detergent05",
+        "name": "Cleaning detergent05",
+        "img": "../assets/images/cleaning_detergent05.png",
+        "description": "표백제 (세제 5레벨)"
+      },
+      {
+        "id": "cleaning_detergent06",
+        "name": "Cleaning detergent06",
+        "img": "../assets/images/cleaning_detergent06.png",
+        "description": "빨래세제 (세제 6레벨)"
+      },
+      {
+        "id": "cleaning_detergent07",
+        "name": "Cleaning detergent07",
+        "img": "../assets/images/cleaning_detergent07.png",
+        "description": "베이킹소다 (세제 7레벨)"
+      },
+      {
+        "id": "cleaning_detergent08",
+        "name": "Cleaning detergent08",
+        "img": "../assets/images/cleaning_detergent08.png",
+        "description": "산업용 세제 (세제 8레벨)"
+      }
+    ],
+    "청소 도구": [
+      {
+        "id": "cleaning01",
+        "name": "cleaning01",
+        "img": "../assets/images/cleaning01.png",
+        "description": "행주 (청소도구 1레벨)"
+      },
+      {
+        "id": "cleaning02",
+        "name": "cleaning02",
+        "img": "../assets/images/cleaning02.png",
+        "description": "칫솔 (청소도구 2레벨)"
+      },
+      {
+        "id": "cleaning03",
+        "name": "cleaning03",
+        "img": "../assets/images/cleaning03.png",
+        "description": "스펀지 (청소도구 3레벨)"
+      },
+      {
+        "id": "cleaning04",
+        "name": "cleaning04",
+        "img": "../assets/images/cleaning04.png",
+        "description": "청소솔 (청소도구 4레벨)"
+      },
+      {
+        "id": "cleaning05",
+        "name": "cleaning05",
+        "img": "../assets/images/cleaning05.png",
+        "description": "대야 (청소도구 5레벨)"
+      },
+      {
+        "id": "cleaning06",
+        "name": "cleaning06",
+        "img": "../assets/images/cleaning06.png",
+        "description": "뚫어뻥 (청소도구 6레벨)"
+      },
+      {
+        "id": "cleaning07",
+        "name": "cleaning07",
+        "img": "../assets/images/cleaning07.png",
+        "description": "빗자루 (청소도구 7레벨)"
+      },
+      {
+        "id": "cleaning08",
+        "name": "cleaning08",
+        "img": "../assets/images/cleaning08.png",
+        "description": "쓰레받기 (청소도구 8레벨)"
+      },
+      {
+        "id": "cleaning09",
+        "name": "cleaning09",
+        "img": "../assets/images/cleaning09.png",
+        "description": "먼지떨이 (청소도구 9레벨)"
+      },
+      {
+        "id": "cleaning10",
+        "name": "cleaning10",
+        "img": "../assets/images/cleaning10.png",
+        "description": "유리닦이 (청소도구 10레벨)"
+      },
+      {
+        "id": "cleaning11",
+        "name": "cleaning11",
+        "img": "../assets/images/cleaning11.png",
+        "description": "마포걸레 (청소도구 11레벨)"
+      },
+      {
+        "id": "cleaning12",
+        "name": "cleaning12",
+        "img": "../assets/images/cleaning12.png",
+        "description": "부직포 밀대걸레 (청소도구 12레벨)"
+      }
+    ],
+    "전등": [
+      {
+        "id": "construction_light_01",
+        "name": "Construction light01",
+        "img": "../assets/images/construction_light_01.png",
+        "description": "구리선 (전등 1레벨)" 
+      }, 
+      {
+        "id": "construction_light_02",
+        "name": "Construction light02",
+        "img": "../assets/images/construction_light_02.png",
+        "description": "필라멘트 (전등 2레벨)"
+      },
+      {
+        "id": "construction_light_03",
+        "name": "Construction light03",
+        "img": "../assets/images/construction_light_03.png",
+        "description": "꼬마전구 (전등 3레벨)"
+      },
+      {
+        "id": "construction_light_04",
+        "name": "Construction light04",
+        "img": "../assets/images/construction_light_04.png",
+        "description": "백열전구 (전등 4레벨)"
+      },
+      {
+        "id": "construction_light_05",
+        "name": "Construction light05",
+        "img": "../assets/images/construction_light_05.png",
+        "description": "형광등 (전등 5레벨)"
+      }
+    ],
+    "건축재료": [
+      {
+        "id": "construction01",
+        "name": "Construction 01",
+        "img": "../assets/images/construction01.png",
+        "description": "모래 (공사자재 1레벨)"
+      },
+      {
+        "id": "construction02",
+        "name": "Construction 02",
+        "img": "../assets/images/construction02.png",
+        "description": "돌바구니 (공사자재 2레벨)"
+      },
+      {
+        "id": "construction03",
+        "name": "Construction 03",
+        "img": "../assets/images/construction03.png",
+        "description": "시멘트 주머니 (공사자재 3레벨)"
+      },
+      {
+        "id": "construction04",
+        "name": "Construction 04",
+        "img": "../assets/images/construction04.png",
+        "description": "벽돌 (공사자재 4레벨)"
+      },
+      {
+        "id": "construction05",
+        "name": "Construction 05",
+        "img": "../assets/images/construction05.png",
+        "description": "콘크리트 블록 (공사자재 5레벨)"
+      },
+      {
+        "id": "construction06",
+        "name": "Construction 06",
+        "img": "../assets/images/construction06.png",
+        "description": "타일 (공사자재 6레벨)"
+      },
+      {
+        "id": "construction07",
+        "name": "Construction 07",
+        "img": "../assets/images/construction07.png",
+        "description": "철제 빔 (공사자재 7레벨)"
+      },
+      {
+        "id": "construction08",
+        "name": "Construction 08",
+        "img": "../assets/images/construction08.png",
+        "description": "유리 (공사자재 8레벨)"
+      },
+      {
+        "id": "construction09",
+        "name": "Construction 09",
+        "img": "../assets/images/construction09.png",
+        "description": "화강암 (공사자재 9레벨)"
+      },
+      {
+        "id": "construction10",
+        "name": "Construction 10",
+        "img": "../assets/images/construction10.png",
+        "description": "대리석 (공사자재 10레벨)"
+      },
+      {
+        "id": "construction11",
+        "name": "Construction 11",
+        "img": "../assets/images/construction11.png",
+        "description": "점판암 (공사자재 11레벨)"
+      }
+    ],
+    "생활용품": [
+      {
+        "id": "Household_01",
+        "name": "Household 01",
+        "img": "../assets/images/Household_01.png",
+        "description": "고무줄 (생활용품 1레벨)"
+      },
+      {
+        "id": "Household_02",
+        "name": "Household 02",
+        "img": "../assets/images/Household_02.png",
+        "description": "옷걸이 (생활용품 2레벨)"
+      },
+      {
+        "id": "Household_03",
+        "name": "Household 03",
+        "img": "../assets/images/Household_03.png",
+        "description": "손톱깎이 (생활용품 3레벨)"
+      },
+      {
+        "id": "Household_04",
+        "name": "Household 04",
+        "img": "../assets/images/Household_04.png",
+        "description": "실과 바늘 (생활용품 4레벨)"
+      },
+      {
+        "id": "Household_05",
+        "name": "Household 05",
+        "img": "../assets/images/Household_05.png",
+        "description": "집게 (생활용품 5레벨)"
+      },
+      {
+        "id": "Household_06",
+        "name": "Household 06",
+        "img": "../assets/images/Household_06.png",
+        "description": "접시 (생활용품 6레벨)"
+      },
+      {
+        "id": "Household_07",
+        "name": "Household 07",
+        "img": "../assets/images/Household_07.png",
+        "description": "티 세트 (생활용품 7레벨)"
+      },
+      {
+        "id": "Household_08",
+        "name": "Household 08",
+        "img": "../assets/images/Household_08.png",
+        "description": "거울 (생활용품 8레벨)"
+      },
+      {
+        "id": "Household_09",
+        "name": "Household 09",
+        "img": "../assets/images/Household_09.png",
+        "description": "커튼 (생활용품 9레벨)"
+      },
+      {
+        "id": "Household_10",
+        "name": "Household 10",
+        "img": "../assets/images/Household_10.png",
+        "description": "이불 (생활용품 10레벨)"
+      },
+      {
+        "id": "Household_11",
+        "name": "Household 11",
+        "img": "../assets/images/Household_11.png",
+        "description": "카페트 (생활용품 11레벨)"
+      },
+      {
+        "id": "Household_12",
+        "name": "Household 12",
+        "img": "../assets/images/Household_12.png",
+        "description":"이불 (생활용품 12레벻)"
+         
+      }
+    ],
+    "학용품": [
+      {
+        "id": "stationery_01",
+        "name": "Stationery 01",
+        "img": "../assets/images/stationery_01.png",
+        "description": "연필 (학용품 1레벨)"
+      },
+      {
+        "id": "stationery_02",
+        "name": "Stationery 02",
+        "img": "../assets/images/stationery_02.png",
+        "description": "크레용 (학용품 2레벨)"
+      },
+      {
+        "id": "stationery_03",
+        "name": "Stationery 03",
+        "img": "../assets/images/stationery_03.png",
+        "description": "풀 (학용품 3레벨)"
+      },
+      {
+        "id": "stationery_04",
+        "name": "Stationery 04",
+        "img": "../assets/images/stationery_04.png",
+        "description": "삼각자 (학용품 4레벨)"
+      },
+      {
+        "id": "stationery_05",
+        "name": "Stationery 05",
+        "img": "../assets/images/stationery_05.png",
+        "description": "색종이 (학용품 5레벨)"
+      },
+      {
+        "id": "stationery_06",
+        "name": "Stationery 06",
+        "img": "../assets/images/stationery_06.png",
+        "description": "스카치테이프 (학용품 6레벨)"
+      },
+      {
+        "id": "stationery_07",
+        "name": "Stationery 07",
+        "img": "../assets/images/stationery_07.png",
+        "description": "스테이플러 (학용품 7레벨)"
+      },
+      {
+        "id": "stationery_08",
+        "name": "Stationery 08",
+        "img": "../assets/images/stationery_08.png",
+        "description": "노트 (학용품 8레벨)"
+      },
+      {
+        "id": "stationery_09",
+        "name": "Stationery 09",
+        "img": "../assets/images/stationery_09.png",
+        "description": "미술도구 세트 (학용품 9레벨)"
+      },
+      {
+        "id": "stationery_10",
+        "name": "Stationery 10",
+        "img": "../assets/images/stationery_10.png",
+        "description": "만년필 (학용품 10레벨)"
+      }
+    ],
+    "장난감": [
+      {
+        "id": "stationery_toy_01",
+        "name": "Stationery Toy 01",
+        "img": "../assets/images/stationery_toy_01.png",
+        "description": "유리구슬 (장난감 1레벨)"
+      },
+      {
+        "id": "stationery_toy_02",
+        "name": "Stationery Toy 02",
+        "img": "../assets/images/stationery_toy_02.png",
+        "description": "바람개비 (장난감 2레벨)"
+      },
+      {
+        "id": "stationery_toy_03",
+        "name": "Stationery Toy 03",
+        "img": "../assets/images/stationery_toy_03.png",
+        "description": "쌓기블럭 (장난감 3레벨)"
+      },
+      {
+        "id": "stationery_toy_04",
+        "name": "Stationery Toy 04",
+        "img": "../assets/images/stationery_toy_04.png",
+        "description": "요요 (장난감 4레벨)"
+      },
+      {
+        "id": "stationery_toy_05",
+        "name": "Stationery Toy 05",
+        "img": "../assets/images/stationery_toy_05.png",
+        "description": "큐브 (장난감 5레벨)"
+      },
+      {
+        "id": "stationery_toy_06",
+        "name": "Stationery Toy 06",
+        "img": "../assets/images/stationery_toy_06.png",
+        "description": "장난감 기차 (장난감 6레벨)"
+      },
+      {
+        "id": "stationery_toy_07",
+        "name": "Stationery Toy 07",
+        "img": "../assets/images/stationery_toy_07.png",
+        "description": "요술봉 (장난감 7레벨)"
+      },
+      {
+        "id": "stationery_toy_08",
+        "name": "Stationery Toy 08",
+        "img": "../assets/images/stationery_toy_08.png",
+        "description": "물총 (장난감 8레벨)"
+      }
+    ],
+    "페인트": [
+      {
+        "id": "tool_paint01",
+        "name": "Tool paint01",
+        "img": "../assets/images/tool_paint01.png",
+        "description": "페인트(소) (페인트 1레벨)"
+      },
+      {
+        "id": "tool_paint02",
+        "name": "Tool paint02",
+        "img": "../assets/images/tool_paint02.png",
+        "description": "페인트(중) (페인트 2레벨)"
+      },
+      {
+        "id": "tool_paint03",
+        "name": "Tool paint03",
+        "img": "../assets/images/tool_paint03.png",
+        "description": "페인트(대) (페인트 3레벨)"
+      },
+      {
+        "id": "tool_paint04",
+        "name": "Tool paint04",
+        "img": "../assets/images/tool_paint04.png",
+        "description": "페인트(특대) (페인트 4레벨)"
+      },
+      {
+        "id": "tool_paint05",
+        "name": "Tool paint05",
+        "img": "../assets/images/tool_paint05.png",
+        "description": "페인트(초특대) (페인트 5레벨)"
+      }
+    ],
+    "나사": [
+      {
+        "id": "tool_screw01",
+        "name": "Tool screw01",
+        "img": "../assets/images/tool_screw01.png",
+        "description": "나사 1개 (나사 1레벨)"
+      },
+      {
+        "id": "tool_screw02",
+        "name": "Tool screw02",
+        "img": "../assets/images/tool_screw02.png",
+        "description": "나사 2개 (나사 2레벨)"
+      },
+      {
+        "id": "tool_screw03",
+        "name": "Tool screw03",
+        "img": "../assets/images/tool_screw03.png",
+        "description": "나사 4개 (나사 3레벨)"
+      },
+      {
+        "id": "tool_screw04",
+        "name": "Tool screw04",
+        "img": "../assets/images/tool_screw04.png",
+        "description": "나사 더미 (나사 4레벨)"
+      },
+      {
+        "id": "tool_screw05",
+        "name": "Tool screw05",
+        "img": "../assets/images/tool_screw05.png",
+        "description": "나사 박스 (나사 5레벨)"
+      },
+      {
+        "id": "tool_screw06",
+        "name": "Tool screw06",
+        "img": "../assets/images/tool_screw06.png",
+        "description": "나사 보관함 (나사 6레벨)"
+      }
+    ],
+    "공구": [
+      {
+        "id": "tool01",
+        "name": "tool01",
+        "img": "../assets/images/tool01.png",
+        "description": "드라이버 (공구 1레벨)"
+      },
+      {
+        "id": "tool02",
+        "name": "tool02",
+        "img": "../assets/images/tool02.png",
+        "description": "니퍼 (공구 2레벨)"
+      },
+      {
+        "id": "tool03",
+        "name": "tool03",
+        "img": "../assets/images/tool03.png",
+        "description": "스패너 (공구 3레벨)"
+      },
+      {
+        "id": "tool04",
+        "name": "tool04",
+        "img": "../assets/images/tool04.png",
+        "description": "파이프렌치 (공구 4레벨)"
+      },
+      {
+        "id": "tool05",
+        "name": "tool05",
+        "img": "../assets/images/tool05.png",
+        "description": "페인트솔 (공구 5레벨)"
+      },
+      {
+        "id": "tool06",
+        "name": "tool06",
+        "img": "../assets/images/tool06.png",
+        "description": "끌 (공구 6레벨)"
+      },
+      {
+        "id": "tool07",
+        "name": "tool07",
+        "img": "../assets/images/tool07.png",
+        "description": "망치 (공구 7레벨)"
+      },
+      {
+        "id": "tool08",
+        "name": "tool08",
+        "img": "../assets/images/tool08.png",
+        "description": "실톱 (공구 8레벨)"
+      },
+      {
+        "id": "tool09",
+        "name": "tool09",
+        "img": "../assets/images/tool09.png",
+        "description": "페인트롤러 (공구 9레벨)"
+      },
+      {
+        "id": "tool10",
+        "name": "tool10",
+        "img": "../assets/images/tool10.png",
+        "description": "삽 (공구 10레벨)"
+      },
+      {
+        "id": "tool11",
+        "name": "tool11",
+        "img": "../assets/images/tool11.png",
+        "description": "곡괭이 (공구 11레벨)"
+      },
+      {
+        "id": "tool12",
+        "name": "tool12",
+        "img": "../assets/images/tool12.png",
+        "description": "노루발못뽑이(빠루) (공구 12레벨)"
+      }
+    ],
+    "물": [
+      {
+        "id": "water_01",
+        "name": "Water 01",
+        "img": "../assets/images/water_01.png",
+        "description": "물방울 (물 1레벨)"
+      },
+      {
+        "id": "water_02",
+        "name": "Water 02",
+        "img": "../assets/images/water_02.png",
+        "description": "스포이드 (물 2레벨)"
+      },
+      {
+        "id": "water_03",
+        "name": "Water 03",
+        "img": "../assets/images/water_03.png",
+        "description": "물컵 (물 3레벨)"
+      },
+      {
+        "id": "water_04",
+        "name": "Water 04",
+        "img": "../assets/images/water_04.png",
+        "description": "유리병 (물 4레벨)"
+      },
+      {
+        "id": "water_05",
+        "name": "Water 05",
+        "img": "../assets/images/water_05.png",
+        "description": "페트병 (물 5레벨)"
+      },
+      {
+        "id": "water_06",
+        "name": "Water 06",
+        "img": "../assets/images/water_06.png",
+        "description": "정수기 물통 (물 6레벨)"
+      }
+    ],
+    "나무": [
+      {
+        "id": "wood01",
+        "name": "wood01",
+        "img": "../assets/images/wood01.png",
+        "description": "통나무 (목재 1레벨)"
+      },
+      {
+        "id": "wood02",
+        "name": "wood02",
+        "img": "../assets/images/wood02.png",
+        "description": "깎은 나무 (목재 2레벨)"
+      },
+      {
+        "id": "wood03",
+        "name": "wood03",
+        "img": "../assets/images/wood03.png",
+        "description": "합판 (목재 3레벨)"
+      },
+      {
+        "id": "wood04",
+        "name": "wood04",
+        "img": "../assets/images/wood04.png",
+        "description": "사각 미니 스툴 (목재 4레벨)"
+      },
+      {
+        "id": "wood05",
+        "name": "wood05",
+        "img": "../assets/images/wood05.png",
+        "description": "의자 (목재 5레벨)"
+      },
+      {
+        "id": "wood06",
+        "name": "wood06",
+        "img": "../assets/images/wood06.png",
+        "description": "원형 탁자 (목재 6레벨)"
+      },
+      {
+        "id": "wood07",
+        "name": "wood07",
+        "img": "../assets/images/wood07.png",
+        "description": "협탁 (목재 7레벨)"
+      },
+      {
+        "id": "wood08",
+        "name": "wood08",
+        "img": "../assets/images/wood08.png",
+        "description": "옷장 (목재 8레벨)"
+      },
+      {
+        "id": "wood09",
+        "name": "wood09",
+        "img": "../assets/images/wood09.png",
+        "description": "소파 (목재 9레벨)"
+      },
+      {
+        "id": "wood10",
+        "name": "wood10",
+        "img": "../assets/images/wood10.png",
+        "description": "침대 (목재 10레벨)"
+      }
+    ]
+  }
+}

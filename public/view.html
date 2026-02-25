@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>안아줘요 동물맨션 퀘스트 작성 도우미</title>
+  <!-- 분리된 CSS 파일 불러오기 -->
+  <link rel="stylesheet" href="view.css">
+</head>
+<body>
+
+  <!-- 작업바 -->
+  <header id="toolbar" role="banner" aria-label="작업바">
+    <nav aria-label="작업 버튼">
+      <button type="button" id="btn-main">main</button>
+      <button type="button" id="btn-edit">edit</button>
+      <button type="button" id="btn-copy">copy</button>
+    </nav>
+    <div class="spacer"></div>
+  </header>
+
+  <!-- 사이드바: 퀘스트 요구 아이템 목록 -->
+  <aside id="sidebar" aria-label="퀘스트 요구 아이템">
+    <section class="quest-items" aria-labelledby="quest-items-title">
+      <h2 id="quest-items-title">요구 아이템</h2>
+      <img id="sidebar-header" src="../assets/images/hugMeHead.png" alt="퀘스트 아이템 추가" title="퀘스트 아이템 추가" />
+      <ul id="quest-item-list">
+        <!-- 동적으로 퀘스트 추가 -->
+      </ul>
+    </section>
+  </aside>
+
+  <!-- 오른쪽: 카테고리 아코디언 + 4×N 그리드 -->
+  <section id="catalog" aria-label="아이템 카탈로그"> 
+    <!-- 카테고리들이 들어갈 예정 -->
+  </section>
+
+  <script type="module" src="view.js"></script>
+</body>
+</html>
