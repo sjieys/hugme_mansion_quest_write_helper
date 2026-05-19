@@ -1,34 +1,25 @@
-// server.js
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/assets", express.static(path.join(__dirname, "assets")));
 
-// 라우트
-app.get("/", (req, res) => {
-  res.send("서버 잘 돌아간다!");
+app.get("/data", (req, res) => {
+  const raw = fs.readFileSync(path.join(__dirname, "assets/items.json"), "utf-8");
+  res.json(JSON.parse(raw));
 });
 
-// JSON 불러오기
-const data = require("./assets/items.json");
-app.get('/data', (req, res) => {
-  const data = require("./assets/items.json");
-  // console.log(`===========server코드========`);
-  // console.log(data.categories);
-  res.json(data);
-});
-
-// const quest = require("./assets/quest.json");
-// app.get("/quest", (req, res) => {
-//   res.json(quest);
-// });
-
-// 서버 실행
 app.listen(PORT, () => {
   console.log(`✅ 서버 실행 중 http://localhost:${PORT}`);
 });

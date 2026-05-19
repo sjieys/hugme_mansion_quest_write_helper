@@ -1,69 +1,163 @@
 import {
   returnData, returnPlusItem, returnQuest,
-  returnItem, renderCategories, returnPlusQuest} from './utils.js';
+  returnItem, renderCategories, returnPlusQuest, changeToItem
+} from './utils.js';
 
-// 상단 작업바
-const mainBtn = document.getElementById("btn-main");
-const editBtn = document.getElementById("btn-edit");
+const questList = document.getElementById("quest-item-list");
+const catalog = document.getElementById("catalog");
 const copyBtn = document.getElementById("btn-copy");
 
-// selectedPlusItem
 let selectedPlusItem = null;
 
-// json 불러오기
+// json 불러오기 & 카탈로그 렌더링
 const data = await returnData();
-
-// 이미지 렌더링
-const catalog = document.getElementById("catalog");
 renderCategories(data, catalog.id);
 
-// testQuest로 +- 버튼 test
-const testQuest = returnQuest();
-document.getElementById("quest-item-list").appendChild(testQuest);
-document.getElementById("quest-item-list").appendChild(returnQuest());
-const plusQuest = returnPlusQuest();
-document.getElementById("quest-item-list").appendChild(plusQuest);
+// 퀘스트 목록 초기화: + 버튼 하나만
+const plusQuestBtn = returnPlusQuest();
+questList.appendChild(plusQuestBtn);
 
-// TODO: 사이드바 폭 때문에 휴지통이 밑으로 내려감
-//  사이드바 폭도 늘리고, plusItem, 휴지통의 폭을 40,40,20으로 해야할 듯
+// 퀘스트 목록 클릭 (위임)
+questList.addEventListener("click", (event) => {
+  // + 퀘스트 버튼 클릭 → 새 퀘스트 카드로 교체 후 새 + 버튼 추가
+  const plusQuest = event.target.closest(".plus-quest");
+  if (plusQuest) {
+    const newQuest = returnQuest();
+    questList.replaceChild(newQuest, plusQuest);
+    questList.appendChild(returnPlusQuest());
+    return;
+  }
 
+  // 삭제 버튼
+  const delBtn = event.target.closest(".quest-delete");
+  if (delBtn) {
+    delBtn.closest(".quest-item").remove();
+    return;
+  }
 
-
-// TODO: plusItem에서 클릭 이벤트 발생 시,
-// selectedPlusItem 변수에 저장
-// selctedPlusItem의 css바꾸기(좀 더 진하게 칠해지기) 되나?
-// document.querySelectorAll(".plus-item").forEach(plusItem => {
-//   plusItem.addEventListener("click", () => {
-//     selectedPlusItem = plusItem;
-//     // document.querySelectorAll(".plus-item").forEach(item => {
-//     //   item.style.backgroundColor = "#f0f0f0";
-//     // });
-//     alert("이제 이미지 목록에서 아이템을 선택하세요!");
-//   });
-// });
-document.getElementById("quest-item-list").addEventListener("click", (event) => {
-  if (event.target.classList.contains("plus-item")) {
-    selectedPlusItem = event.target;
-    alert("이제 이미지 목록에서 아이템을 선택하세요!");
+  // + 아이템 슬롯 클릭 → 선택/해제 토글
+  const plusItem = event.target.closest(".plus-item");
+  if (plusItem) {
+    if (selectedPlusItem) selectedPlusItem.classList.remove("selected");
+    if (selectedPlusItem === plusItem) {
+      selectedPlusItem = null;
+    } else {
+      selectedPlusItem = plusItem;
+      selectedPlusItem.classList.add("selected");
+    }
+    return;
   }
 });
 
-// TODO: 이미지쪽에서 클릭 이벤트 발생 시,
-// newItem이라는 객체를 만들어서 changeToItem 함수에 넘겨줘야 함
-document.getElementById("categories").addEventListener("click", (event) => {
-  const card = event.target.closest(".item-card");
-  if(!card) return; // item-card가 아닌 곳 클릭 시 무시
-  alert(`item: ${card}`);
+// 드래그 앤 드롭 순서 변경
+let draggedQuest = null;
+
+function clearDropIndicators() {
+  questList.querySelectorAll(".drop-before, .drop-after").forEach(el => {
+    el.classList.remove("drop-before", "drop-after");
+  });
+}
+
+questList.addEventListener("dragstart", (event) => {
+  const item = event.target.closest(".quest-item");
+  if (!item) return;
+  draggedQuest = item;
+  item.classList.add("dragging");
+  event.dataTransfer.effectAllowed = "move";
 });
 
-// document.getElementById("categories").addEventListener("click", (event) => {
-//   alert("클릭은 됨");
-// });
+questList.addEventListener("dragend", () => {
+  if (draggedQuest) draggedQuest.classList.remove("dragging");
+  draggedQuest = null;
+  clearDropIndicators();
+});
 
-const questList = document.getElementById("quest-item-list");
+questList.addEventListener("dragover", (event) => {
+  event.preventDefault();
+  const item = event.target.closest(".quest-item");
+  if (!item || item === draggedQuest) return;
+  clearDropIndicators();
+  const { top, height } = item.getBoundingClientRect();
+  if (event.clientY < top + height / 2) {
+    item.classList.add("drop-before");
+  } else {
+    item.classList.add("drop-after");
+  }
+});
 
-questList.addEventListener("click", (event) => {
-  if (event.target.classList.contains("plus-quest")) {
-    questList.appendChild(returnPlusQuest());
+questList.addEventListener("dragleave", (event) => {
+  if (!questList.contains(event.relatedTarget)) clearDropIndicators();
+});
+
+questList.addEventListener("drop", (event) => {
+  event.preventDefault();
+  const item = event.target.closest(".quest-item");
+  if (!item || !draggedQuest || item === draggedQuest) return;
+  const { top, height } = item.getBoundingClientRect();
+  if (event.clientY < top + height / 2) {
+    questList.insertBefore(draggedQuest, item);
+  } else {
+    questList.insertBefore(draggedQuest, item.nextSibling);
+  }
+  clearDropIndicators();
+});
+
+// copy 버튼: 퀘스트 목록을 텍스트로 클립보드에 복사
+copyBtn.addEventListener("click", () => {
+  const quests = [...questList.querySelectorAll(".quest-item")];
+  const lines = quests.map((quest, i) => {
+    const items = [...quest.querySelectorAll(".item")];
+    if (items.length === 0) return null;
+    const parts = items.map(item => {
+      const name = item.querySelector("img").alt;
+      const count = item.querySelector(".badge").textContent;
+      return `${name} ${count}개`;
+    });
+    return `${i + 1}. ${parts.join(", ")}`;
+  }).filter(Boolean);
+
+  if (lines.length === 0) {
+    alert("복사할 퀘스트가 없습니다.");
+    return;
+  }
+
+  const text = lines.join("\n");
+
+  const onSuccess = () => {
+    const orig = copyBtn.textContent;
+    copyBtn.textContent = "복사됨 ✓";
+    setTimeout(() => { copyBtn.textContent = orig; }, 1500);
+  };
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(onSuccess).catch(() => fallbackCopy(text, onSuccess));
+  } else {
+    fallbackCopy(text, onSuccess);
+  }
+});
+
+function fallbackCopy(text, onSuccess) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.cssText = "position:fixed;opacity:0";
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand("copy");
+  ta.remove();
+  onSuccess();
+}
+
+// 카탈로그 클릭: 선택된 슬롯이 있으면 아이템으로 채우기
+catalog.addEventListener("click", (event) => {
+  const card = event.target.closest(".item-card");
+  if (!card) return;
+
+  if (selectedPlusItem) {
+    const newItem = returnItem(
+      card.dataset.img,
+      card.dataset.name
+    );
+    changeToItem(selectedPlusItem, newItem);
+    selectedPlusItem = null;
   }
 });

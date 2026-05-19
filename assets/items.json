@@ -48,6 +48,12 @@
         "name": "Cleaning detergent08",
         "img": "../assets/images/cleaning_detergent08.png",
         "description": "산업용 세제 (세제 8레벨)"
+      },
+      {
+        "id": "cleaning_detergent09",
+        "name": "Cleaning detergent09",
+        "img": "../assets/images/cleaning_detergent09.png",
+        "description": "테레빈유 (세제 9레벨)"
       }
     ],
     "청소 도구": [

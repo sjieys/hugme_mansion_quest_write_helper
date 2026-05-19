@@ -37,25 +37,16 @@ export function renderCategories(categories, containerId) {
     items.forEach(item => {
       const li = document.createElement("li");
       li.className = "item-card";
+      li.dataset.img = item.img;
+      li.dataset.name = item.description;
 
       const img = document.createElement("img");
       img.src = item.img;
-      console.log(item.img);
       img.alt = item.name;
       img.className = "item-image";
-      img.title = item.description; // 마우스 오버 시 설명 표시
-
-      const spanName = document.createElement("span");
-      spanName.className = "name";
-      // spanName.textContent = item.name;
-
-      const spanDesc = document.createElement("span");
-      spanDesc.className = "desc";
-      // spanDesc.textContent = item.description;
+      img.title = item.description;
 
       li.appendChild(img);
-      li.appendChild(spanName);
-      li.appendChild(spanDesc);
       ul.appendChild(li);
     });
 
@@ -67,36 +58,25 @@ export function renderCategories(categories, containerId) {
 export function returnPlusItem() {
   const plusItem = document.createElement("div");
   plusItem.className = "plus-item";
-  plusItem.textContent = "+"; 
-
-  // TODO: 이 부분은 나중에 .plus-item 한테 클릭 되면 let 변수에
-  // 저장해서 이미지 클릭을 받게 되면 해당 이미지로 채워지게 할 예정
-  plusItem.addEventListener("click", () => {
-    // 클릭 시 실제 아이템으로 교체
-    const newItem = returnItem("../assets/images/null.gif", "샘플아이템");
-    plusItem.replaceWith(newItem);
-  });
-
+  plusItem.textContent = "+";
   return plusItem;
 }
 
 export function returnQuest() {
   const li = document.createElement("li");
   li.className = "quest-item";
-  // NOTE: 이거 굳이 필요한가? 
-  // 아이템 컨테이너 
-  // const items = document.createElement("div");
-  // items.className = "items";
+  li.draggable = true;
 
-  
-  // 휴지통 버튼
+  const handle = document.createElement("div");
+  handle.className = "drag-handle";
+  handle.textContent = "⠿";
+  handle.setAttribute("aria-hidden", "true");
+
   const delBtn = document.createElement("button");
   delBtn.className = "quest-delete";
   delBtn.textContent = "🗑";
-  delBtn.addEventListener("click", () => {
-    li.remove();
-  });
-  
+
+  li.appendChild(handle);
   li.appendChild(returnPlusItem());
   li.appendChild(returnPlusItem());
   li.appendChild(delBtn);
@@ -158,13 +138,7 @@ export function returnItem(itemPath, itemName, count = 1) {
 export function returnPlusQuest() {
   const plusQuest = document.createElement("li");
   plusQuest.className = "plus-quest";
-  plusQuest.textContent = "+"; 
-
-  plusQuest.addEventListener("click", () => {
-    // 클릭 시 plus-item 2개로 교체
-    plusQuest.replaceWith(returnQuest());
-  });
-
+  plusQuest.textContent = "+";
   return plusQuest;
 }
 
