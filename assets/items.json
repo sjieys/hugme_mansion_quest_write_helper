@@ -135,8 +135,8 @@
         "id": "construction_light_01",
         "name": "Construction light01",
         "img": "../assets/images/construction_light_01.png",
-        "description": "구리선 (전등 1레벨)" 
-      }, 
+        "description": "구리선 (전등 1레벨)"
+      },
       {
         "id": "construction_light_02",
         "name": "Construction light02",
@@ -160,6 +160,12 @@
         "name": "Construction light05",
         "img": "../assets/images/construction_light_05.png",
         "description": "형광등 (전등 5레벨)"
+      },
+      {
+        "id": "construction_light_06",
+        "name": "Construction light06",
+        "img": "../assets/images/construction_light_06.png",
+        "description": "전등 6레벨"
       }
     ],
     "건축재료": [
@@ -301,8 +307,69 @@
         "id": "Household_12",
         "name": "Household 12",
         "img": "../assets/images/Household_12.png",
-        "description":"이불 (생활용품 12레벻)"
-         
+        "description": "생활용품 12레벨"
+      }
+    ],
+    "전자제품": [
+      {
+        "id": "Household_Electronic01",
+        "name": "Household Electronic01",
+        "img": "../assets/images/Household_Electronic01.png",
+        "description": "버튼 (전자제품 1레벨)"
+      },
+      {
+        "id": "Household_Electronic02",
+        "name": "Household Electronic02",
+        "img": "../assets/images/Household_Electronic02.png",
+        "description": "조이스틱 레버 (전자제품 2레벨)"
+      },
+      {
+        "id": "Household_Electronic03",
+        "name": "Household Electronic03",
+        "img": "../assets/images/Household_Electronic03.png",
+        "description": "플러그 (전자제품 3레벨)"
+      },
+      {
+        "id": "Household_Electronic04",
+        "name": "Household Electronic04",
+        "img": "../assets/images/Household_Electronic04.png",
+        "description": "마우스 (전자제품 4레벨)"
+      },
+      {
+        "id": "Household_Electronic05",
+        "name": "Household Electronic05",
+        "img": "../assets/images/Household_Electronic05.png",
+        "description": "휴대용 플레이어 (전자제품 5레벨)"
+      },
+      {
+        "id": "Household_Electronic06",
+        "name": "Household Electronic06",
+        "img": "../assets/images/Household_Electronic06.png",
+        "description": "핸드폰 (전자제품 6레벨)"
+      },
+      {
+        "id": "Household_Electronic07",
+        "name": "Household Electronic07",
+        "img": "../assets/images/Household_Electronic07.png",
+        "description": "리모컨 (전자제품 7레벨)"
+      },
+      {
+        "id": "Household_Electronic08",
+        "name": "Household Electronic08",
+        "img": "../assets/images/Household_Electronic08.png",
+        "description": "휴대용 게임기 (전자제품 8레벨)"
+      },
+      {
+        "id": "Household_Electronic09",
+        "name": "Household Electronic09",
+        "img": "../assets/images/Household_Electronic09.png",
+        "description": "가정용 게임기 (전자제품 9레벨)"
+      },
+      {
+        "id": "Household_Electronic10",
+        "name": "Household Electronic10",
+        "img": "../assets/images/Household_Electronic10.png",
+        "description": "PC (전자제품 10레벨)"
       }
     ],
     "학용품": [
@@ -365,6 +432,18 @@
         "name": "Stationery 10",
         "img": "../assets/images/stationery_10.png",
         "description": "만년필 (학용품 10레벨)"
+      },
+      {
+        "id": "stationery_11",
+        "name": "Stationery 11",
+        "img": "../assets/images/stationery_11.png",
+        "description": "컴퍼스 (학용품 11레벨)"
+      },
+      {
+        "id": "stationery_12",
+        "name": "Stationery 12",
+        "img": "../assets/images/stationery_12.png",
+        "description": "클립보드 (학용품 12레벨)"
       }
     ],
     "장난감": [
@@ -415,6 +494,18 @@
         "name": "Stationery Toy 08",
         "img": "../assets/images/stationery_toy_08.png",
         "description": "물총 (장난감 8레벨)"
+      },
+      {
+        "id": "stationery_toy_09",
+        "name": "Stationery Toy 09",
+        "img": "../assets/images/stationery_toy_09.png",
+        "description": "체스말 (장난감 9레벨)"
+      },
+      {
+        "id": "stationery_toy_10",
+        "name": "Stationery Toy 10",
+        "img": "../assets/images/stationery_toy_10.png",
+        "description": "글로켄슈필 (장난감 10레벨)"
       }
     ],
     "페인트": [
@@ -422,31 +513,37 @@
         "id": "tool_paint01",
         "name": "Tool paint01",
         "img": "../assets/images/tool_paint01.png",
-        "description": "페인트(소) (페인트 1레벨)"
+        "description": "수채화 물감 (페인트 1레벨)"
       },
       {
         "id": "tool_paint02",
         "name": "Tool paint02",
         "img": "../assets/images/tool_paint02.png",
-        "description": "페인트(중) (페인트 2레벨)"
+        "description": "포스터칼라 (페인트 2레벨)"
       },
       {
         "id": "tool_paint03",
         "name": "Tool paint03",
         "img": "../assets/images/tool_paint03.png",
-        "description": "페인트(대) (페인트 3레벨)"
+        "description": "수성 페인트 (페인트 3레벨)"
       },
       {
         "id": "tool_paint04",
         "name": "Tool paint04",
         "img": "../assets/images/tool_paint04.png",
-        "description": "페인트(특대) (페인트 4레벨)"
+        "description": "에나멜 페인트 (페인트 4레벨)"
       },
       {
         "id": "tool_paint05",
         "name": "Tool paint05",
         "img": "../assets/images/tool_paint05.png",
-        "description": "페인트(초특대) (페인트 5레벨)"
+        "description": "에나멜 페인트 (페인트 5레벨)"
+      },
+      {
+        "id": "tool_paint06",
+        "name": "Tool paint06",
+        "img": "../assets/images/tool_paint06.png",
+        "description": "컬러 에폭시 페인트(페인트 6레벨)"
       }
     ],
     "나사": [
@@ -485,6 +582,12 @@
         "name": "Tool screw06",
         "img": "../assets/images/tool_screw06.png",
         "description": "나사 보관함 (나사 6레벨)"
+      },
+      {
+        "id": "tool_screw07",
+        "name": "Tool screw07",
+        "img": "../assets/images/tool_screw07.png",
+        "description": "나사 7레벨"
       }
     ],
     "공구": [
@@ -659,6 +762,420 @@
         "name": "wood10",
         "img": "../assets/images/wood10.png",
         "description": "침대 (목재 10레벨)"
+      }
+    ],
+    "백신": [
+      {
+        "id": "vaccine_01",
+        "name": "Vaccine 01",
+        "img": "../assets/images/vaccine_01.png",
+        "description": "비트 (백신 1레벨)"
+      },
+      {
+        "id": "vaccine_02",
+        "name": "Vaccine 02",
+        "img": "../assets/images/vaccine_02.png",
+        "description": "바이트 (백신 2레벨)"
+      },
+      {
+        "id": "vaccine_03",
+        "name": "Vaccine 03",
+        "img": "../assets/images/vaccine_03.png",
+        "description": "코드 (백신 3레벨)"
+      },
+      {
+        "id": "vaccine_04",
+        "name": "Vaccine 04",
+        "img": "../assets/images/vaccine_04.png",
+        "description": "백신 (백신 4레벨)"
+      },
+      {
+        "id": "vaccine_05",
+        "name": "Vaccine 05",
+        "img": "../assets/images/vaccine_05.png",
+        "description": "안티 스캔 (백신 5레벨)"
+      },
+      {
+        "id": "vaccine_06",
+        "name": "Vaccine 06",
+        "img": "../assets/images/vaccine_06.png",
+        "description": "속성 분석기 (백신 6레벨)"
+      },
+      {
+        "id": "vaccine_07",
+        "name": "Vaccine 07",
+        "img": "../assets/images/vaccine_07.png",
+        "description": "방어막 생성기 (백신 7레벨)"
+      },
+      {
+        "id": "vaccine_08",
+        "name": "Vaccine 08",
+        "img": "../assets/images/vaccine_08.png",
+        "description": "백신 8레벨"
+      }
+    ],
+    "바이러스": [
+      {
+        "id": "vIrus_01",
+        "name": "Virus 01",
+        "img": "../assets/images/vIrus_01.jpg",
+        "description": "알파 변이 (바이러스 1레벨)"
+      },
+      {
+        "id": "vIrus_02",
+        "name": "Virus 02",
+        "img": "../assets/images/vIrus_02.png",
+        "description": "베타 변이 (바이러스 2레벨)"
+      },
+      {
+        "id": "vIrus_03",
+        "name": "Virus 03",
+        "img": "../assets/images/vIrus_03.png",
+        "description": "감마 변이 (바이러스 3레벨)"
+      },
+      {
+        "id": "vIrus_04",
+        "name": "Virus 04",
+        "img": "../assets/images/vIrus_04.png",
+        "description": "델타 변이 (바이러스 4레벨)"
+      },
+      {
+        "id": "vIrus_05",
+        "name": "Virus 05",
+        "img": "../assets/images/vIrus_05.png",
+        "description": "앱실론 변이 (바이러스 5레벨)"
+      },
+      {
+        "id": "vIrus_06",
+        "name": "Virus 06",
+        "img": "../assets/images/vIrus_06.png",
+        "description": "제타 변이 (바이러스 6레벨)"
+      }
+    ],
+    "파이프": [
+      {
+        "id": "Pipe_01",
+        "name": "Pipe 01",
+        "img": "../assets/images/Pipe_01.png",
+        "description": "밸브 (배관 1레벨)"
+      },
+      {
+        "id": "Pipe_02",
+        "name": "Pipe 02",
+        "img": "../assets/images/Pipe_02.png",
+        "description": "직선 파이프와 밸브 (배관 2레벨)"
+      },
+      {
+        "id": "Pipe_03",
+        "name": "Pipe 03",
+        "img": "../assets/images/Pipe_03.png",
+        "description": "곡선 파이프와 밸브 (배관 3레벨)"
+      },
+      {
+        "id": "Pipe_05",
+        "name": "Pipe 05",
+        "img": "../assets/images/Pipe_05.png",
+        "description": "수도관 (배관 5레벨)"
+      },
+      {
+        "id": "Pipe_06",
+        "name": "Pipe 06",
+        "img": "../assets/images/Pipe_06.png",
+        "description": "개수대 (배관 6레벨)"
+      },
+      {
+        "id": "Pipe_07",
+        "name": "Pipe 07",
+        "img": "../assets/images/Pipe_07.png",
+        "description": "다목적 개수대 (배관 7레벨)"
+      },
+      {
+        "id": "Pipe_08",
+        "name": "Pipe 08",
+        "img": "../assets/images/Pipe_08.png",
+        "description": "정원호수 (배관 8레벨)"
+      }
+    ],
+    "빵": [
+      {
+        "id": "bread_01",
+        "name": "Bread 01",
+        "img": "../assets/images/bread_01.png",
+        "description": "모닝빵 (빵 1레벨)"
+      },
+      {
+        "id": "bread_02",
+        "name": "Bread 02",
+        "img": "../assets/images/bread_02.png",
+        "description": "식빵 슬라이스 (빵 2레벨)"
+      },
+      {
+        "id": "bread_03",
+        "name": "Bread 03",
+        "img": "../assets/images/bread_03.png",
+        "description": "글레이즈드 도넛 (빵 3레벨)"
+      },
+      {
+        "id": "bread_04",
+        "name": "Bread 04",
+        "img": "../assets/images/bread_04.png",
+        "description": "머핀 (빵 4레벨)"
+      },
+      {
+        "id": "bread_05",
+        "name": "Bread 05",
+        "img": "../assets/images/bread_05.png",
+        "description": "바게트 (빵 5레벨)"
+      },
+      {
+        "id": "bread_06",
+        "name": "Bread 06",
+        "img": "../assets/images/bread_06.png",
+        "description": "크루아상 (빵 6레벨)"
+      },
+      {
+        "id": "bread_07",
+        "name": "Bread 07",
+        "img": "../assets/images/bread_07.png",
+        "description": "프레첼 (빵 7레벨)"
+      },
+      {
+        "id": "bread_08",
+        "name": "Bread 08",
+        "img": "../assets/images/bread_08.png",
+        "description": "샌드위치 (빵 8레벨)"
+      },
+      {
+        "id": "bread_09",
+        "name": "Bread 09",
+        "img": "../assets/images/bread_09.png",
+        "description": "아이스크림 와플 (빵 9레벨)"
+      },
+      {
+        "id": "bread_10",
+        "name": "Bread 10",
+        "img": "../assets/images/bread_10.png",
+        "description": "팬케이크 (빵 10레벨)"
+      }
+    ],
+    "커피": [
+      {
+        "id": "coffee_01",
+        "name": "Coffee 01",
+        "img": "../assets/images/coffee_01.png",
+        "description": "에스프레소 디카페인 (커피 1레벨)"
+      },
+      {
+        "id": "coffee_02",
+        "name": "Coffee 02",
+        "img": "../assets/images/coffee_02.png",
+        "description": "블랙 커피 (커피 2레벨)"
+      },
+      {
+        "id": "coffee_03",
+        "name": "Coffee 03",
+        "img": "../assets/images/coffee_03.png",
+        "description": "카페 라떼 (커피 3레벨)"
+      },
+      {
+        "id": "coffee_04",
+        "name": "Coffee 04",
+        "img": "../assets/images/coffee_04.png",
+        "description": "아이스모카 (커피 4레벨)"
+      },
+      {
+        "id": "coffee_05",
+        "name": "Coffee 05",
+        "img": "../assets/images/coffee_05.png",
+        "description": "카푸치노 (커피 5레벨)"
+      },
+      {
+        "id": "coffee_06",
+        "name": "Coffee 06",
+        "img": "../assets/images/coffee_06.png",
+        "description": "녹차 (커피 6레벨)"
+      },
+      {
+        "id": "coffee_07",
+        "name": "Coffee 07",
+        "img": "../assets/images/coffee_07.png",
+        "description": "생강 홍차 (커피 7레벨)"
+      }
+    ],
+    "씨앗주머니": [
+      {
+        "id": "seed_bag_01",
+        "name": "Seed bag 01",
+        "img": "../assets/images/seed_bag_01.png",
+        "description": "작은 씨앗주머니 (씨앗주머니 1레벨)"
+      },
+      {
+        "id": "seed_bag_02",
+        "name": "Seed bag 02",
+        "img": "../assets/images/seed_bag_02.png",
+        "description": "씨앗주머니 (씨앗주머니 2레벨)"
+      },
+      {
+        "id": "seed_bag_03",
+        "name": "Seed bag 03",
+        "img": "../assets/images/seed_bag_03.png",
+        "description": "큰 씨앗주머니 (씨앗주머니 3레벨)"
+      },
+      {
+        "id": "seed_bag_04",
+        "name": "Seed bag 04",
+        "img": "../assets/images/seed_bag_04.png",
+        "description": "개봉된 씨앗주머니 (씨앗주머니 4레벨)"
+      }
+    ],
+    "식물": [
+      {
+        "id": "plant_01",
+        "name": "Plant 01",
+        "img": "../assets/images/plant_01.png",
+        "description": "씨앗 (식물 1레벨)"
+      },
+      {
+        "id": "plant_02",
+        "name": "Plant 02",
+        "img": "../assets/images/plant_02.png",
+        "description": "발아 (식물 2레벨)"
+      },
+      {
+        "id": "plant_03",
+        "name": "Plant 03",
+        "img": "../assets/images/plant_03.png",
+        "description": "새싹 (식물 3레벨)"
+      },
+      {
+        "id": "plant_04",
+        "name": "Plant 04",
+        "img": "../assets/images/plant_04.png",
+        "description": "이파리 (식물 4레벨)"
+      },
+      {
+        "id": "plant_05",
+        "name": "Plant 05",
+        "img": "../assets/images/plant_05.png",
+        "description": "작은 나무 (식물 5레벨)"
+      },
+      {
+        "id": "plant_06",
+        "name": "Plant 06",
+        "img": "../assets/images/plant_06.png",
+        "description": "나무 (식물 6레벨)"
+      },
+      {
+        "id": "plant_07",
+        "name": "Plant 07",
+        "img": "../assets/images/plant_07.png",
+        "description": "개화 나무 (식물 7레벨)"
+      },
+      {
+        "id": "plant_08",
+        "name": "Plant 08",
+        "img": "../assets/images/plant_08.png",
+        "description": "열매 나무 (식물 8레벨)"
+      },
+      {
+        "id": "plant_09",
+        "name": "Plant 09",
+        "img": "../assets/images/plant_09.png",
+        "description": "열매 나무 (식물 9레벨)"
+      },
+      {
+        "id": "plant_10",
+        "name": "Plant 10",
+        "img": "../assets/images/plant_10.png",
+        "description": "열매 나무 (식물 10레벨)"
+      }
+    ],
+    "보상": [
+      {
+        "id": "reward_clover04",
+        "name": "reward_clover04",
+        "img": "../assets/images/reward_clover04.png",
+        "description": "네잎 클로버 (경험치 4렙)",
+        "quickQty": true
+      },
+      {
+        "id": "reward_box_red",
+        "name": "reward_box_red",
+        "img": "../assets/images/reward_box_red01.png",
+        "description": "소형 빨간 상자"
+      },
+      {
+        "id": "reward_box_blue",
+        "name": "reward_box_blue",
+        "img": "../assets/images/reward_box_blue01.png",
+        "description": "소형 파란 상자"
+      },
+      {
+        "id": "reward_scissors",
+        "name": "reward_scissors",
+        "img": "../assets/images/reward_scissors.png",
+        "description": "가위"
+      },
+      {
+        "id": "present_box",
+        "name": "present_box",
+        "img": "../assets/images/present_box.png",
+        "description": "선물 상자"
+      },
+      {
+        "id": "energy01",
+        "name": "energy01",
+        "img": "../assets/images/energy01.png",
+        "description": "노랑 에너지 (에너지 1렙)"
+      },
+      {
+        "id": "energy02",
+        "name": "energy02",
+        "img": "../assets/images/energy02.png",
+        "description": "초록 에너지 (에너지 2렙)"
+      },
+      {
+        "id": "energy03",
+        "name": "energy03",
+        "img": "../assets/images/energy03.png",
+        "description": "파랑 에너지 (에너지 3렙)"
+      },
+      {
+        "id": "energy04",
+        "name": "energy04",
+        "img": "../assets/images/energy04.png",
+        "description": "보라 에너지 (에너지 4렙)"
+      },
+      {
+        "id": "energy05",
+        "name": "energy05",
+        "img": "../assets/images/energy05.png",
+        "description": "빨강 에너지 (에너지 5렙)"
+      },
+      {
+        "id": "camera01",
+        "name": "camera01",
+        "img": "../assets/images/camera01.png",
+        "description": "카메라 1"
+      },
+      {
+        "id": "camera02",
+        "name": "camera02",
+        "img": "../assets/images/camera02.png",
+        "description": "카메라 2"
+      },
+      {
+        "id": "camera03",
+        "name": "camera03",
+        "img": "../assets/images/camera03.png",
+        "description": "카메라 3"
+      },
+      {
+        "id": "ruby04",
+        "name": "ruby04",
+        "img": "../assets/images/ruby04.png",
+        "description": "루비 4단계",
+        "quickQty": true
       }
     ]
   }

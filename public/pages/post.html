@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>안아줘요 동물맨션 — 게시글 상세</title>
+  <link rel="stylesheet" href="../styles/shared.css">
+  <style>
+    .post-header {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .post-header-top {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    }
+    .post-header-title { font-size: 22px; font-weight: 800; flex: 1; }
+    .post-header-meta { display: flex; gap: 10px; align-items: center; font-size: 13px; color: var(--text-muted); }
+
+    .quest-read-card {
+      padding: 16px;
+      margin-bottom: 10px;
+    }
+    .quest-read-header {
+      font-size: 12px; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .quest-read-items {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px;
+    }
+    .quest-read-item {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      width: 72px;
+    }
+    .read-thumb {
+      position: relative; width: 72px; height: 72px;
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--border); background: var(--bg);
+    }
+    .read-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .read-thumb .badge {
+      position: absolute; bottom: 4px; right: 4px;
+      min-width: 20px; height: 20px;
+      background: rgba(0,0,0,.65); color: #fff;
+      font-size: 11px; font-weight: 700; border-radius: 5px;
+      display: flex; align-items: center; justify-content: center; padding: 0 4px;
+    }
+    .read-name { font-size: 11px; color: var(--text-muted); text-align: center; line-height: 1.3; }
+
+    .quest-read-rewards {
+      font-size: 14px; color: var(--text-muted);
+      padding-top: 6px; border-top: 1px solid var(--border);
+      display: flex; gap: 10px;
+    }
+
+    .action-bar {
+      display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .status-select-wrap {
+      display: flex; align-items: center; gap: 6px;
+    }
+    .status-select-wrap label { font-size: 13px; color: var(--text-muted); }
+    select.input { height: 36px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <span class="nav-logo">🏠 동물맨션</span>
+    <a href="main.html">홈</a>
+    <a href="view.html">퀘스트 작성</a>
+    <a href="board.html">선발대 게시판</a>
+    <a href="official.html">퀘스트 게시판</a>
+    <a href="progress.html">진척도</a>
+    <div class="nav-spacer"></div>
+    <div class="nav-user">
+      <img id="nav-avatar" class="nav-avatar" src="" alt="">
+      <span id="nav-username"></span>
+      <button id="btn-logout">로그아웃</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div id="loading" class="empty-state">불러오는 중...</div>
+
+    <div id="post-wrap" style="display:none">
+      <div class="post-header">
+        <div class="post-header-top">
+          <h1 class="post-header-title" id="post-title"></h1>
+          <span class="tag" id="post-status"></span>
+        </div>
+        <div class="post-header-meta">
+          <span id="post-author"></span>
+          <span>·</span>
+          <time id="post-date"></time>
+        </div>
+      </div>
+
+      <div id="action-bar" class="action-bar"></div>
+
+      <div id="post-quests"></div>
+    </div>
+  </div>
+
+  <script type="module" src="post.js"></script>
+</body>
+</html>

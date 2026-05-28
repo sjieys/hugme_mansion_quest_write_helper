@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>안아줘요 동물맨션 — 나의 진척도</title>
+  <link rel="stylesheet" href="../styles/shared.css">
+  <style>
+    .progress-section { margin-bottom: 28px; }
+    .progress-section-title {
+      font-size: 13px; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.6px;
+      margin: 0 0 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .progress-card {
+      padding: 16px 20px;
+      margin-bottom: 10px;
+    }
+    .progress-card-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+    }
+    .progress-card-title { font-size: 15px; font-weight: 700; flex: 1; }
+    .progress-fraction { font-size: 12px; color: var(--text-muted); }
+
+    .quest-checks {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .quest-check {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 8px 10px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--bg);
+      cursor: pointer; transition: background 0.12s;
+    }
+    .quest-check:hover { background: #f0ebe6; }
+    .quest-check.done { background: #f0fdf4; border-color: #bbf7d0; }
+    .quest-check input[type="checkbox"] {
+      width: 16px; height: 16px; margin-top: 1px; cursor: pointer; accent-color: var(--accent);
+    }
+    .quest-check-label { flex: 1; font-size: 13px; line-height: 1.5; }
+    .quest-check.done .quest-check-label { color: var(--text-muted); text-decoration: line-through; }
+
+    .quest-reward-line { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    .progress-card-header {
+      cursor: pointer; user-select: none;
+      border-radius: 8px; padding: 4px 6px; margin: -4px -6px;
+      transition: background 0.12s;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .progress-card-header:hover { background: var(--bg); }
+    .toggle-icon {
+      font-size: 9px; color: var(--text-muted);
+      transition: transform 0.2s; flex-shrink: 0;
+    }
+    .progress-card.open .toggle-icon { transform: rotate(90deg); }
+
+    .quest-checks { display: none; margin-top: 10px; }
+    .progress-card.open .quest-checks { display: flex; flex-direction: column; gap: 6px; }
+
+    .quest-check-items {
+      display: flex; gap: 6px; flex-wrap: wrap; align-items: flex-end;
+    }
+    .check-thumb {
+      position: relative; width: 48px; height: 48px;
+      border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--border); background: var(--bg);
+      flex-shrink: 0;
+    }
+    .check-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .check-reward-row {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      padding-top: 6px; border-top: 1px dashed var(--border); margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <span class="nav-logo">🏠 동물맨션</span>
+    <a href="main.html">홈</a>
+    <a href="view.html">퀘스트 작성</a>
+    <a href="board.html">선발대 게시판</a>
+    <a href="official.html">퀘스트 게시판</a>
+    <a href="progress.html">진척도</a>
+    <div class="nav-spacer"></div>
+    <div class="nav-user">
+      <img id="nav-avatar" class="nav-avatar" src="" alt="">
+      <span id="nav-username"></span>
+      <button id="btn-logout">로그아웃</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>📊 나의 진척도</h1>
+      <div id="overall-wrap" style="display:flex;align-items:center;gap:10px">
+        <span id="overall-text" style="font-size:13px;color:var(--text-muted)"></span>
+        <div class="progress-bar-wrap" style="width:120px">
+          <div class="progress-bar-fill" id="overall-bar" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="progress-content"></div>
+  </div>
+
+  <script type="module" src="progress.js"></script>
+</body>
+</html>

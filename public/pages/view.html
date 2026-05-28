@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>안아줘요 동물맨션 — 퀘스트 작성 도우미</title>
+  <link rel="stylesheet" href="../styles/view.css">
+</head>
+<body>
+
+  <header id="toolbar">
+    <a href="main.html" id="toolbar-home">← 홈</a>
+    <span id="toolbar-title">퀘스트 작성 도우미</span>
+    <nav id="toolbar-actions">
+      <select id="status-select">
+        <option value="draft">작성중</option>
+        <option value="review">검토요청</option>
+      </select>
+      <button type="button" id="btn-save">임시저장</button>
+      <button type="button" id="btn-loads" style="display:none">임시 0</button>
+      <button type="button" id="btn-register">등록</button>
+      <button type="button" id="btn-copy">복사</button>
+      <button type="button" id="btn-logout">로그아웃</button>
+    </nav>
+  </header>
+
+  <aside id="sidebar">
+    <div id="season-header">
+      <h2 class="section-title">시즌 정보</h2>
+      <div class="season-fields">
+        <div class="season-field">
+          <label for="floor-input">층수</label>
+          <input type="number" id="floor-input" min="1" max="99" placeholder="N">
+        </div>
+        <div class="season-field">
+          <label for="type-select">구분</label>
+          <select id="type-select">
+            <option value="">선택</option>
+            <option value="메인">메인</option>
+            <option value="외전">외전</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:4px">퀘스트 목록</h2>
+    <ul id="quest-item-list"></ul>
+  </aside>
+
+  <div id="content-area">
+    <div id="search-wrap">
+      <input type="text" id="search-input" placeholder="아이템 검색...">
+    </div>
+    <section id="catalog"></section>
+  </div>
+
+  <!-- 커스텀 confirm 모달 -->
+  <div id="confirm-modal" class="modal-overlay" style="display:none">
+    <div class="modal-box confirm-box">
+      <p id="confirm-message" class="confirm-message"></p>
+      <div class="confirm-buttons">
+        <button id="confirm-yes" class="btn-yes">예</button>
+        <button id="confirm-no" class="btn-no">아니오</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 임시저장 목록 모달 -->
+  <div id="save-modal" class="modal-overlay" style="display:none">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span>임시저장 목록</span>
+        <button id="modal-close">✕</button>
+      </div>
+      <ul id="save-list"></ul>
+    </div>
+  </div>
+
+  <script type="module" src="view.js"></script>
+</body>
+</html>

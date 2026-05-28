@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>안아줘요 동물맨션 — 로그인</title>
+  <link rel="stylesheet" href="../styles/shared.css">
+  <style>
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-card {
+      width: 340px; padding: 44px 36px; text-align: center;
+    }
+    .login-logo { font-size: 52px; margin-bottom: 18px; }
+    .login-title { font-size: 20px; font-weight: 800; margin: 0 0 8px; line-height: 1.4; }
+    .login-desc { font-size: 13px; color: var(--text-muted); margin: 0 0 32px; }
+    .google-btn-wrap { display: flex; justify-content: center; }
+    .login-error { margin-top: 16px; font-size: 13px; color: #b91c1c; display: none; }
+
+    /* 닉네임 설정 단계 */
+    #step-nickname { display: none; }
+    .nickname-label { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
+    .nickname-hint { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+    #nickname-input {
+      width: 100%; height: 40px; padding: 0 14px;
+      border: 1px solid var(--border); border-radius: 9px;
+      font-size: 15px; text-align: center;
+      background: var(--bg); color: var(--text);
+      margin-bottom: 12px;
+    }
+    #nickname-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,99,90,.13); }
+    #btn-confirm-nickname {
+      width: 100%; height: 40px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 9px;
+      font-size: 14px; font-weight: 700; cursor: pointer;
+    }
+    #btn-confirm-nickname:hover { background: var(--accent-hover); }
+
+    .google-profile {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--bg); border-radius: 10px;
+      padding: 10px 14px; margin-bottom: 20px; text-align: left;
+    }
+    .google-profile img { width: 36px; height: 36px; border-radius: 50%; }
+    .google-profile-info { flex: 1; }
+    .google-profile-name { font-size: 13px; font-weight: 600; }
+    .google-profile-email { font-size: 12px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <div class="login-card card">
+    <div class="login-logo">🏠</div>
+    <h1 class="login-title">안아줘요 동물맨션<br>퀘스트 도우미</h1>
+
+    <!-- 1단계: Google 로그인 -->
+    <div id="step-google">
+      <p class="login-desc">Google 계정으로 로그인하세요.</p>
+      <div class="google-btn-wrap">
+        <div id="google-btn"></div>
+      </div>
+      <p class="login-error" id="login-error">로그인에 실패했습니다. 다시 시도해 주세요.</p>
+    </div>
+
+    <!-- 2단계: 닉네임 설정 -->
+    <div id="step-nickname">
+      <div id="google-profile-wrap"></div>
+      <p class="nickname-label">게시판에서 사용할 닉네임을 설정하세요.</p>
+      <input type="text" id="nickname-input" maxlength="20" placeholder="닉네임 (최대 20자)">
+      <p class="nickname-hint">다른 멤버들에게 보이는 이름입니다.</p>
+      <button id="btn-confirm-nickname">완료</button>
+    </div>
+  </div>
+
+  <script>
+    let pendingUser = null;
+
+    async function initGoogle() {
+      const res = await fetch('/api/config');
+      const { clientId } = await res.json();
+
+      if (!clientId) {
+        document.getElementById('login-error').textContent = '서버 설정이 필요합니다. (.env에 GOOGLE_CLIENT_ID 입력)';
+        document.getElementById('login-error').style.display = '';
+        return;
+      }
+
+      google.accounts.id.initialize({
+        client_id: clientId,
+        callback: handleCredential,
+      });
+
+      google.accounts.id.renderButton(
+        document.getElementById('google-btn'),
+        { theme: 'outline', size: 'large', locale: 'ko', width: 268 }
+      );
+    }
+
+    async function handleCredential({ credential }) {
+      const r = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ credential }),
+      });
+      if (!r.ok) {
+        document.getElementById('login-error').style.display = '';
+        return;
+      }
+      const user = await r.json();
+
+      // 서버에서 저장된 닉네임 조회
+      const profileRes = await fetch(`/api/users/${user.id}`);
+      const profile = await profileRes.json();
+
+      if (profile.nickname) {
+        // 닉네임 있음 → 바로 로그인
+        finishLogin({ ...user, nickname: profile.nickname });
+      } else {
+        // 닉네임 없음 → 설정 단계
+        pendingUser = user;
+        showNicknameStep(user);
+      }
+    }
+
+    function showNicknameStep(user) {
+      document.getElementById('step-google').style.display = 'none';
+      document.getElementById('step-nickname').style.display = 'block';
+
+      document.getElementById('google-profile-wrap').innerHTML = `
+        <div class="google-profile">
+          <img src="${user.picture}" alt="">
+          <div class="google-profile-info">
+            <div class="google-profile-name">${user.name}</div>
+            <div class="google-profile-email">${user.email}</div>
+          </div>
+        </div>
+      `;
+      document.getElementById('nickname-input').value = user.name;
+      document.getElementById('nickname-input').select();
+    }
+
+    document.getElementById('btn-confirm-nickname').addEventListener('click', async () => {
+      const nickname = document.getElementById('nickname-input').value.trim();
+      if (!nickname) { alert('닉네임을 입력해주세요.'); return; }
+
+      await fetch(`/api/users/${pendingUser.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nickname }),
+      });
+
+      finishLogin({ ...pendingUser, nickname });
+    });
+
+    document.getElementById('nickname-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('btn-confirm-nickname').click();
+    });
+
+    async function finishLogin(user) {
+      // 기존 게시글 authorId 소급 연결 (실패해도 로그인은 진행)
+      try {
+        const oldNames = new Set();
+        const prevUser = localStorage.getItem('google_user');
+        if (prevUser) {
+          const p = JSON.parse(prevUser);
+          if (p.nickname) oldNames.add(p.nickname);
+          if (p.name)     oldNames.add(p.name);
+        }
+        const prevUsername = localStorage.getItem('username');
+        if (prevUsername) oldNames.add(prevUsername);
+        if (user.nickname) oldNames.add(user.nickname);
+
+        const migrate = name => fetch('/api/users/migrate-posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ authorId: user.id, oldAuthor: name }),
+        });
+        await Promise.allSettled([...oldNames].map(migrate));
+      } catch {}
+
+      localStorage.setItem('google_user', JSON.stringify(user));
+      localStorage.setItem('username', user.nickname || user.name || '');
+      const next = new URLSearchParams(location.search).get('next') || 'main.html';
+      location.href = next;
+    }
+
+    window.onGoogleLibraryLoad = initGoogle;
+  </script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</body>
+</html>

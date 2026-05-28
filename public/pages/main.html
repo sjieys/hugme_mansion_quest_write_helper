@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>안아줘요 동물맨션 — 퀘스트 도우미</title>
+  <link rel="stylesheet" href="../styles/shared.css">
+  <style>
+    .hero { text-align: center; padding: 60px 20px 40px; }
+    .hero h1 { font-size: 28px; font-weight: 900; margin: 0 0 10px; }
+    .hero p  { color: var(--text-muted); margin: 0 0 36px; font-size: 15px; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px; max-width: 860px; margin: 0 auto;
+    }
+    .menu-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: box-shadow 0.15s, transform 0.15s;
+      display: block;
+    }
+    .menu-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+    .menu-card .icon { font-size: 36px; margin-bottom: 12px; }
+    .menu-card h2 { margin: 0 0 6px; font-size: 15px; font-weight: 700; }
+    .menu-card p  { margin: 0; font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <span class="nav-logo">🏠 동물맨션</span>
+    <a href="main.html" class="active">홈</a>
+    <a href="view.html">퀘스트 작성</a>
+    <a href="board.html">선발대 게시판</a>
+    <a href="official.html">퀘스트 게시판</a>
+    <a href="progress.html">진척도</a>
+    <div class="nav-spacer"></div>
+    <div class="nav-user">
+      <img id="nav-avatar" class="nav-avatar" src="" alt="">
+      <span id="nav-username"></span>
+      <button id="btn-logout">로그아웃</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <h1>🏠 안아줘요 동물맨션<br>퀘스트 도우미</h1>
+      <p>퀘스트를 작성하고, 공유하고, 진척도를 관리하세요.</p>
+    </div>
+
+    <div class="menu-grid">
+      <a href="view.html" class="menu-card">
+        <div class="icon">✍️</div>
+        <h2>퀘스트 작성</h2>
+        <p>아이템을 클릭해서 퀘스트 목록을 빠르게 작성하세요.</p>
+      </a>
+      <a href="board.html" class="menu-card">
+        <div class="icon">📋</div>
+        <h2>선발대 게시판</h2>
+        <p>작성한 퀘스트를 올리고 검토를 요청하세요.</p>
+      </a>
+      <a href="official.html" class="menu-card">
+        <div class="icon">⭐</div>
+        <h2>퀘스트 게시판</h2>
+        <p>공식으로 채택된 시즌 퀘스트를 확인하세요.</p>
+      </a>
+      <a href="progress.html" class="menu-card">
+        <div class="icon">📊</div>
+        <h2>나의 진척도</h2>
+        <p>퀘스트별 완료 현황을 체크하고 추적하세요.</p>
+      </a>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initNav, requireAuth } from '../hooks/nav.js';
+    if (!requireAuth()) throw new Error();
+    initNav('main.html');
+  </script>
+</body>
+</html>
