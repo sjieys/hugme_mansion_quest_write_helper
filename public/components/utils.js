@@ -89,7 +89,7 @@ export function returnRewardItem(img, name, count = 1) {
   badge.className = "badge";
   badge.value = count;
   badge.min = 1;
-  badge.max = 99;
+  badge.max = 999;
   badge.addEventListener("keydown", (e) => {
     if (e.key === "Backspace" && badge.value === "1") {
       e.preventDefault();
@@ -101,7 +101,7 @@ export function returnRewardItem(img, name, count = 1) {
     }
   });
   badge.addEventListener("input", () => {
-    if (parseInt(badge.value, 10) > 99) badge.value = 99;
+    if (parseInt(badge.value, 10) > 999) badge.value = 999;
   });
   badge.addEventListener("blur", () => {
     const v = parseInt(badge.value, 10);
@@ -132,7 +132,7 @@ export function returnRewardItem(img, name, count = 1) {
   plus.textContent = "+";
   plus.addEventListener("click", () => {
     const v = parseInt(badge.value, 10);
-    if (v < 99) badge.value = v + 1;
+    if (v < 999) badge.value = v + 1;
   });
 
   controls.appendChild(minus);

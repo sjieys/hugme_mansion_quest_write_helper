@@ -1,6 +1,6 @@
 import {
   returnData, returnPlusItem, returnQuest,
-  returnItem, renderCategories, returnPlusQuest, changeToItem,
+  returnItem, renderCategories, changeToItem,
   returnPlusReward, returnRewardItem,
 } from '../components/utils.js';
 import { requireAuth, getGoogleUser, getUsername, logout, isAdmin } from '../hooks/nav.js';
@@ -47,6 +47,7 @@ const modalClose   = document.getElementById("modal-close");
 let selectedPlusItem   = null;
 let selectedPlusReward = null;
 let selectedRewardItem = null;
+let selectedItem       = null;
 
 if (!isAdmin()) {
   statusSelect.style.display = 'none';
@@ -55,7 +56,7 @@ if (!isAdmin()) {
 // ── 초기화 ──────────────────────────────────────────────
 const data = await returnData();
 renderCategories(data, catalog.id);
-questList.appendChild(returnPlusQuest());
+questList.appendChild(returnQuest());
 updateLoadsBtn();
 
 // ── 수정 모드 복원 ───────────────────────────────────────
@@ -70,19 +71,25 @@ if (editId) {
   }
 }
 
-// ── 퀘스트 목록 클릭 (위임) ─────────────────────────────
-questList.addEventListener("click", (event) => {
-  const plusQuest = event.target.closest(".plus-quest");
-  if (plusQuest) {
-    const newQuest = returnQuest();
-    questList.replaceChild(newQuest, plusQuest);
-    questList.appendChild(returnPlusQuest());
+// ── 맨 밑 빈 퀘스트 보장 ────────────────────────────────
+function ensureEmptyQuestAtEnd() {
+  const quests = [...questList.querySelectorAll(".quest-item")];
+  if (quests.length === 0) {
+    questList.appendChild(returnQuest());
     return;
   }
+  const last = quests[quests.length - 1];
+  if (last.querySelector(".quest-top .item")) {
+    questList.appendChild(returnQuest());
+  }
+}
 
+// ── 퀘스트 목록 클릭 (위임) ─────────────────────────────
+questList.addEventListener("click", (event) => {
   const delBtn = event.target.closest(".quest-delete");
   if (delBtn) {
     delBtn.closest(".quest-item").remove();
+    ensureEmptyQuestAtEnd();
     return;
   }
 
@@ -90,16 +97,30 @@ questList.addEventListener("click", (event) => {
   if (plusItem) {
     if (selectedPlusReward) { selectedPlusReward.classList.remove("selected"); selectedPlusReward = null; }
     if (selectedRewardItem) { selectedRewardItem.classList.remove("selected"); selectedRewardItem = null; }
+    if (selectedItem)       { selectedItem.classList.remove("selected");       selectedItem = null; }
     if (selectedPlusItem) selectedPlusItem.classList.remove("selected");
     selectedPlusItem = (selectedPlusItem === plusItem) ? null : plusItem;
     if (selectedPlusItem) selectedPlusItem.classList.add("selected");
     return;
   }
 
+  // 배치된 아이템 선택 (클릭으로 재선택 → 카탈로그 재클릭 시 +1)
+  const itemEl = event.target.closest(".quest-top .item");
+  if (itemEl && !event.target.closest(".controls")) {
+    if (selectedPlusItem)   { selectedPlusItem.classList.remove("selected");   selectedPlusItem = null; }
+    if (selectedPlusReward) { selectedPlusReward.classList.remove("selected"); selectedPlusReward = null; }
+    if (selectedRewardItem) { selectedRewardItem.classList.remove("selected"); selectedRewardItem = null; }
+    if (selectedItem) selectedItem.classList.remove("selected");
+    selectedItem = (selectedItem === itemEl) ? null : itemEl;
+    if (selectedItem) selectedItem.classList.add("selected");
+    return;
+  }
+
   const plusReward = event.target.closest(".plus-reward");
   if (plusReward) {
-    if (selectedPlusItem) { selectedPlusItem.classList.remove("selected"); selectedPlusItem = null; }
+    if (selectedPlusItem)   { selectedPlusItem.classList.remove("selected");   selectedPlusItem = null; }
     if (selectedRewardItem) { selectedRewardItem.classList.remove("selected"); selectedRewardItem = null; }
+    if (selectedItem)       { selectedItem.classList.remove("selected");       selectedItem = null; }
     if (selectedPlusReward) selectedPlusReward.classList.remove("selected");
     selectedPlusReward = (selectedPlusReward === plusReward) ? null : plusReward;
     if (selectedPlusReward) selectedPlusReward.classList.add("selected");
@@ -108,8 +129,9 @@ questList.addEventListener("click", (event) => {
 
   const rewardFilled = event.target.closest(".reward-filled");
   if (rewardFilled && !event.target.closest(".controls")) {
-    if (selectedPlusItem) { selectedPlusItem.classList.remove("selected"); selectedPlusItem = null; }
+    if (selectedPlusItem)   { selectedPlusItem.classList.remove("selected");   selectedPlusItem = null; }
     if (selectedPlusReward) { selectedPlusReward.classList.remove("selected"); selectedPlusReward = null; }
+    if (selectedItem)       { selectedItem.classList.remove("selected");       selectedItem = null; }
     if (selectedRewardItem) selectedRewardItem.classList.remove("selected");
     selectedRewardItem = (selectedRewardItem === rewardFilled) ? null : rewardFilled;
     if (selectedRewardItem) selectedRewardItem.classList.add("selected");
@@ -181,7 +203,7 @@ catalog.addEventListener("click", (event) => {
       newReward.classList.add("selected");
     } else if (selectedRewardItem) {
       const badge = selectedRewardItem.querySelector(".badge");
-      badge.value = Math.min(99, (parseInt(badge.value) || 0) + qty);
+      badge.value = Math.min(999, (parseInt(badge.value) || 0) + qty);
     }
     return;
   }
@@ -198,8 +220,27 @@ catalog.addEventListener("click", (event) => {
     }
     selectedPlusReward = null;
   } else if (card.dataset.category !== "보상" && selectedPlusItem) {
-    changeToItem(selectedPlusItem, returnItem(card.dataset.img, card.dataset.name));
+    // 빈 슬롯에 아이템 배치 → 배치 후 자동 선택 + 빈 퀘스트 보장
+    const newItem = returnItem(card.dataset.img, card.dataset.name);
+    changeToItem(selectedPlusItem, newItem);
     selectedPlusItem = null;
+    if (selectedItem) selectedItem.classList.remove("selected");
+    selectedItem = newItem;
+    newItem.classList.add("selected");
+    ensureEmptyQuestAtEnd();
+  } else if (card.dataset.category !== "보상" && selectedItem) {
+    // 이미 배치된 아이템 선택 상태 → 같은 아이템 클릭 시 +1, 다른 아이템 클릭 시 교체
+    if (selectedItem.dataset.img === card.dataset.img) {
+      const badge = selectedItem.querySelector(".badge");
+      const v = parseInt(badge.textContent, 10);
+      if (v < 99) badge.textContent = v + 1;
+    } else {
+      const newItem = returnItem(card.dataset.img, card.dataset.name, 1);
+      selectedItem.classList.remove("selected");
+      selectedItem.replaceWith(newItem);
+      selectedItem = newItem;
+      newItem.classList.add("selected");
+    }
   }
 });
 
@@ -298,7 +339,7 @@ function getCurrentState() {
       count: parseInt(r.querySelector(".badge").value) || 1,
     }));
     return { slots, rewards };
-  });
+  }).filter(quest => quest.slots.some(Boolean)); // 빈 퀘스트 제외
 
   return {
     floor:  floorInput.value,
@@ -330,7 +371,7 @@ function restoreState(state) {
     questList.appendChild(questEl);
   });
 
-  questList.appendChild(returnPlusQuest());
+  questList.appendChild(returnQuest()); // 빈 퀘스트 자동 추가
 }
 
 function updateLoadsBtn() {

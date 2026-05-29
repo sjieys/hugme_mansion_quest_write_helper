@@ -219,6 +219,10 @@ body {
 
 /* 실제 아이템 */
 .item { display: flex; flex-direction: column; gap: 4px; }
+.item.selected .thumb {
+  outline: 2px solid var(--accent);
+  box-shadow: 0 0 0 3px rgba(232,99,90,0.18);
+}
 .thumb {
   position: relative;
   width: 100%;

@@ -762,6 +762,12 @@
         "name": "wood10",
         "img": "../assets/images/wood10.png",
         "description": "침대 (목재 10레벨)"
+      },
+      {
+        "id": "wood11",
+        "name": "wood11",
+        "img": "../assets/images/wood11.png",
+        "description": "책장 (목재 11레벨)"
       }
     ],
     "백신": [
@@ -870,6 +876,12 @@
         "name": "Pipe 03",
         "img": "../assets/images/Pipe_03.png",
         "description": "곡선 파이프와 밸브 (배관 3레벨)"
+      },
+      {
+        "id": "Pipe_04",
+        "name": "Pipe 04",
+        "img": "../assets/images/Pipe_04.jpg",
+        "description": "수도꼭지 (배관 4레벨)"
       },
       {
         "id": "Pipe_05",
@@ -1095,7 +1107,7 @@
         "id": "reward_clover04",
         "name": "reward_clover04",
         "img": "../assets/images/reward_clover04.png",
-        "description": "네잎 클로버 (경험치 4렙)",
+        "description": "50경험치 (경험치 4렙)",
         "quickQty": true
       },
       {
@@ -1176,6 +1188,44 @@
         "img": "../assets/images/ruby04.png",
         "description": "루비 4단계",
         "quickQty": true
+      },
+      {
+        "id": "coin_01_reward",
+        "name": "coin_01_reward",
+        "img": "../assets/images/coin_01.png",
+        "description": "1코인 (코인 1레벨)"
+      }
+    ],
+    "코인": [
+      {
+        "id": "coin_01",
+        "name": "coin_01",
+        "img": "../assets/images/coin_01.png",
+        "description": "3코인 (코인 1레벨)"
+      },
+      {
+        "id": "coin_02",
+        "name": "coin_02",
+        "img": "../assets/images/coin_02.png",
+        "description": "8코인 (코인 2레벨)"
+      },
+      {
+        "id": "coin_03",
+        "name": "coin_03",
+        "img": "../assets/images/coin_03.png",
+        "description": "20코인 (코인 3레벨)"
+      },
+      {
+        "id": "coin_04",
+        "name": "coin_04",
+        "img": "../assets/images/coin_04.png",
+        "description": "50코인 (코인 4레벨)"
+      },
+      {
+        "id": "coin_05",
+        "name": "coin_05",
+        "img": "../assets/images/coin_05.png",
+        "description": "120코인 (코인 5레벨)"
       }
     ]
   }
