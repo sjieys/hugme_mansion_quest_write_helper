@@ -5,13 +5,31 @@ initNav('progress.html');
 
 const me       = getGoogleUser();
 const username = me?.email || me?.name || '';
-const contentEl = document.getElementById('progress-content');
+const contentEl   = document.getElementById('progress-content');
 const overallText = document.getElementById('overall-text');
 const overallBar  = document.getElementById('overall-bar');
 
-const REWARD_LABEL = { clover: '🍀', box: '📦', scissors: '✂️', energy: '⚡' };
-
 let userProgress = {};
+
+function parseLevel(name) {
+  const m = name && name.match(/(\d+)레벨/);
+  return m ? parseInt(m[1], 10) : 1;
+}
+
+function questWeight(quest) {
+  return (quest.slots || []).filter(Boolean).reduce((sum, s) => {
+    return sum + Math.pow(2, parseLevel(s.name) - 1) * (s.count || 1);
+  }, 0);
+}
+
+function fmt(n) {
+  return Math.round(n).toLocaleString('ko-KR');
+}
+
+function pctHtml(done, total) {
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  return `<span class="pct-main">${pct}%</span><span class="pct-sub">(${fmt(done)} / ${fmt(total)})</span>`;
+}
 
 async function load() {
   const [postsRes, progressRes] = await Promise.all([
@@ -27,6 +45,20 @@ async function load() {
   }
 
   render(posts);
+
+  // 퀘스트 게시판에서 넘어온 경우 해당 카드 자동 오픈
+  const openId = new URLSearchParams(location.search).get('open');
+  if (openId) {
+    const targetCard = contentEl.querySelector(`[data-post-id="${openId}"]`);
+    if (targetCard) {
+      targetCard.classList.add('open');
+      requestAnimationFrame(() => {
+        const firstIncomplete = targetCard.querySelector('.quest-check:not(.done)');
+        const scrollTarget = firstIncomplete || targetCard;
+        scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    }
+  }
 }
 
 function progressKey(postId, questIdx) {
@@ -40,8 +72,8 @@ function render(posts) {
     bucket.push(p);
   });
 
-  let totalQuests = 0;
-  const allQuestKeys = [];
+  let totalWeight = 0;
+  const allQuestWeights = {};
 
   contentEl.innerHTML = '';
 
@@ -60,18 +92,28 @@ function render(posts) {
       const quests = (post.quests || []).filter(q => (q.slots || []).some(Boolean));
       if (quests.length === 0) return;
 
-      const postDone = quests.filter((_, i) => userProgress[progressKey(post.id, i)]).length;
-      totalQuests += quests.length;
-      quests.forEach((_, i) => allQuestKeys.push(progressKey(post.id, i)));
+      // 가중치 계산
+      let postTotalWeight = 0;
+      let postDoneWeight  = 0;
+
+      quests.forEach((quest, i) => {
+        const w   = questWeight(quest);
+        const key = progressKey(post.id, i);
+        postTotalWeight += w;
+        totalWeight     += w;
+        allQuestWeights[key] = w;
+        if (userProgress[key]) postDoneWeight += w;
+      });
 
       const card = document.createElement('div');
       card.className = 'progress-card card';
+      card.dataset.postId = post.id;
 
       const title = [post.floor ? post.floor + '층' : '', post.type || ''].filter(Boolean).join(' ');
 
       const barFill = document.createElement('div');
       barFill.className = 'progress-bar-fill';
-      barFill.style.width = quests.length ? `${(postDone / quests.length) * 100}%` : '0%';
+      barFill.style.width = postTotalWeight ? `${(postDoneWeight / postTotalWeight) * 100}%` : '0%';
       const barWrap = document.createElement('div');
       barWrap.className = 'progress-bar-wrap';
       barWrap.style.cssText = 'flex:1;min-width:60px';
@@ -79,7 +121,7 @@ function render(posts) {
 
       const fractionEl = document.createElement('span');
       fractionEl.className = 'progress-fraction';
-      fractionEl.textContent = `${postDone} / ${quests.length}`;
+      fractionEl.innerHTML = pctHtml(postDoneWeight, postTotalWeight);
 
       const toggleIcon = document.createElement('span');
       toggleIcon.className = 'toggle-icon';
@@ -93,7 +135,19 @@ function render(posts) {
       hdr.appendChild(barWrap);
       hdr.appendChild(toggleIcon);
 
-      hdr.addEventListener('click', () => card.classList.toggle('open'));
+      hdr.addEventListener('click', () => {
+        const wasOpen = card.classList.contains('open');
+        card.classList.toggle('open');
+        if (!wasOpen) {
+          // 열릴 때 첫 번째 미완료 퀘스트로 스크롤
+          requestAnimationFrame(() => {
+            const firstIncomplete = checks.querySelector('.quest-check:not(.done)');
+            if (firstIncomplete) {
+              firstIncomplete.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          });
+        }
+      });
 
       const checks = document.createElement('div');
       checks.className = 'quest-checks';
@@ -112,9 +166,12 @@ function render(posts) {
           userProgress[key] = cb.checked;
           row.classList.toggle('done', cb.checked);
           await saveProgress();
-          const newDone = quests.filter((_, j) => userProgress[progressKey(post.id, j)]).length;
-          fractionEl.textContent = `${newDone} / ${quests.length}`;
-          barFill.style.width = quests.length ? `${(newDone / quests.length) * 100}%` : '0%';
+
+          const newDoneWeight = quests.reduce((sum, q, j) => {
+            return sum + (userProgress[progressKey(post.id, j)] ? questWeight(q) : 0);
+          }, 0);
+          fractionEl.innerHTML = pctHtml(newDoneWeight, postTotalWeight);
+          barFill.style.width = postTotalWeight ? `${(newDoneWeight / postTotalWeight) * 100}%` : '0%';
           updateOverall();
         });
 
@@ -158,9 +215,11 @@ function render(posts) {
   }
 
   function updateOverall() {
-    const done = allQuestKeys.filter(k => userProgress[k]).length;
-    const pct  = totalQuests ? Math.round((done / totalQuests) * 100) : 0;
-    overallText.textContent = `${done} / ${totalQuests} 완료`;
+    const doneWeight = Object.entries(allQuestWeights)
+      .filter(([k]) => userProgress[k])
+      .reduce((sum, [, w]) => sum + w, 0);
+    const pct = totalWeight ? Math.round((doneWeight / totalWeight) * 100) : 0;
+    overallText.innerHTML = `<span class="pct-main">${pct}%</span><span class="pct-sub">(${fmt(doneWeight)} / ${fmt(totalWeight)})</span>`;
     overallBar.style.width = pct + '%';
   }
   updateOverall();

@@ -48,6 +48,7 @@ let selectedPlusItem   = null;
 let selectedPlusReward = null;
 let selectedRewardItem = null;
 let selectedItem       = null;
+let editWasOfficial    = false;
 
 if (!isAdmin()) {
   statusSelect.style.display = 'none';
@@ -67,6 +68,7 @@ if (editId) {
     const post = JSON.parse(raw);
     restoreState(post);
     statusSelect.value = post.status || 'draft';
+    editWasOfficial = post.isOfficial || false;
     sessionStorage.removeItem('edit_post');
   }
 }
@@ -211,7 +213,8 @@ catalog.addEventListener("click", (event) => {
   const card = event.target.closest(".item-card");
   if (!card || card.classList.contains("quick-qty-card")) return;
 
-  if (card.dataset.category === "보상" && selectedPlusReward) {
+  if (selectedPlusReward) {
+    // 카테고리 무관하게 모든 아이템을 보상으로 배치 가능
     const newReward = returnRewardItem(card.dataset.img, card.dataset.name);
     selectedPlusReward.replaceWith(newReward);
     const rewardsEl = newReward.parentElement;
@@ -430,6 +433,7 @@ registerBtn.addEventListener('click', async () => {
     type:   state.type,
     quests: state.quests,
     status,
+    ...(editId && editWasOfficial ? { isOfficial: false } : {}),
   };
 
   if (editId) {

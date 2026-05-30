@@ -1190,42 +1190,11 @@
         "quickQty": true
       },
       {
-        "id": "coin_01_reward",
-        "name": "coin_01_reward",
-        "img": "../assets/images/coin_01.png",
-        "description": "1코인 (코인 1레벨)"
-      }
-    ],
-    "코인": [
-      {
-        "id": "coin_01",
-        "name": "coin_01",
-        "img": "../assets/images/coin_01.png",
-        "description": "3코인 (코인 1레벨)"
-      },
-      {
-        "id": "coin_02",
-        "name": "coin_02",
-        "img": "../assets/images/coin_02.png",
-        "description": "8코인 (코인 2레벨)"
-      },
-      {
         "id": "coin_03",
         "name": "coin_03",
         "img": "../assets/images/coin_03.png",
-        "description": "20코인 (코인 3레벨)"
-      },
-      {
-        "id": "coin_04",
-        "name": "coin_04",
-        "img": "../assets/images/coin_04.png",
-        "description": "50코인 (코인 4레벨)"
-      },
-      {
-        "id": "coin_05",
-        "name": "coin_05",
-        "img": "../assets/images/coin_05.png",
-        "description": "120코인 (코인 5레벨)"
+        "description": "20코인 (코인 3레벨)",
+        "quickQty": true
       }
     ]
   }

@@ -109,6 +109,9 @@ function render() {
     editBtn.className = 'btn';
     editBtn.textContent = '수정';
     editBtn.addEventListener('click', () => {
+      if (post.isOfficial) {
+        if (!confirm('이 퀘스트는 공식 퀘스트로 지정되어 있습니다.\n수정하면 공식 지정이 해제됩니다.\n\n정말 수정하시겠습니까?')) return;
+      }
       sessionStorage.setItem('edit_post', JSON.stringify(post));
       location.href = `view.html?edit=${post.id}`;
     });
