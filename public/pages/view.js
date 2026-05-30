@@ -54,6 +54,31 @@ if (!isAdmin()) {
   statusSelect.style.display = 'none';
 }
 
+// ── 모바일 탭 전환 ───────────────────────────────────────
+const sidebarEl     = document.getElementById('sidebar');
+const contentAreaEl = document.getElementById('content-area');
+
+function initMobileTabs() {
+  if (window.innerWidth > 767) return;
+  sidebarEl.classList.add('tab-active');
+  document.querySelectorAll('.mobile-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.mobile-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const target = tab.dataset.tab;
+      sidebarEl.classList.toggle('tab-active', target === 'sidebar');
+      contentAreaEl.classList.toggle('tab-active', target === 'content');
+    });
+  });
+}
+
+function switchToQuestTab() {
+  if (window.innerWidth > 767) return;
+  document.querySelector('.mobile-tab[data-tab="sidebar"]')?.click();
+}
+
+initMobileTabs();
+
 // ── 초기화 ──────────────────────────────────────────────
 const data = await returnData();
 renderCategories(data, catalog.id);
@@ -70,6 +95,15 @@ if (editId) {
     statusSelect.value = post.status || 'draft';
     editWasOfficial = post.isOfficial || false;
     sessionStorage.removeItem('edit_post');
+  }
+}
+
+// ── 자동 추출에서 불러오기 ───────────────────────────────
+if (new URLSearchParams(location.search).get('from') === 'extract') {
+  const raw = sessionStorage.getItem('preload_extract');
+  if (raw) {
+    restoreState(JSON.parse(raw));
+    sessionStorage.removeItem('preload_extract');
   }
 }
 
@@ -231,6 +265,7 @@ catalog.addEventListener("click", (event) => {
     selectedItem = newItem;
     newItem.classList.add("selected");
     ensureEmptyQuestAtEnd();
+    switchToQuestTab();
   } else if (card.dataset.category !== "보상" && selectedItem) {
     // 이미 배치된 아이템 선택 상태 → 같은 아이템 클릭 시 +1, 다른 아이템 클릭 시 교체
     if (selectedItem.dataset.img === card.dataset.img) {

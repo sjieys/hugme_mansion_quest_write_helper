@@ -54,7 +54,17 @@
     .quest-read-rewards {
       font-size: 14px; color: var(--text-muted);
       padding-top: 6px; border-top: 1px solid var(--border);
-      display: flex; gap: 10px;
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      .post-header { padding: 14px 16px; }
+      .post-header-title { font-size: 18px; }
+      .quest-read-item { width: 56px; }
+      .read-thumb { width: 56px; height: 56px; }
+      .read-name { font-size: 10px; }
+      .quest-read-items { gap: 8px; }
+      .quest-read-rewards { gap: 8px; }
     }
 
     .action-bar {
@@ -72,6 +82,7 @@
     <span class="nav-logo">🏠 동물맨션</span>
     <a href="main.html">홈</a>
     <a href="view.html">퀘스트 작성</a>
+    <a href="extract.html">자동 추출</a>
     <a href="board.html">선발대 게시판</a>
     <a href="official.html">퀘스트 게시판</a>
     <a href="progress.html">진척도</a>

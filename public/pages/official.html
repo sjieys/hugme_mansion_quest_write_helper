@@ -67,6 +67,13 @@
     .official-next-done {
       font-size: 12px; color: #15803d; font-weight: 600;
     }
+
+    @media (max-width: 640px) {
+      .official-card { flex-wrap: wrap; gap: 8px; }
+      .official-meta { width: 100%; justify-content: flex-end; }
+      .official-next-thumb { width: 30px; height: 30px; }
+      .official-next-thumb .next-badge { font-size: 8px; min-width: 14px; height: 14px; }
+    }
   </style>
 </head>
 <body>
@@ -74,6 +81,7 @@
     <span class="nav-logo">🏠 동물맨션</span>
     <a href="main.html">홈</a>
     <a href="view.html">퀘스트 작성</a>
+    <a href="extract.html">자동 추출</a>
     <a href="board.html">선발대 게시판</a>
     <a href="official.html">퀘스트 게시판</a>
     <a href="progress.html">진척도</a>
