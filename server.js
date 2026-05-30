@@ -177,14 +177,20 @@ app.get("/api/users/:id", (req, res) => {
 
 app.put("/api/users/:id", (req, res) => {
   const users = readJSON(USERS_FILE, {});
+  const oldNickname = users[req.params.id]?.nickname || users[req.params.id]?.name || "";
   users[req.params.id] = { ...(users[req.params.id] || {}), ...req.body };
   writeJSON(USERS_FILE, users);
 
   if (req.body.nickname) {
     const posts = readJSON(POSTS_FILE, []);
-    const updated = posts.map(p =>
-      p.authorId === req.params.id ? { ...p, author: req.body.nickname } : p
-    );
+    const updated = posts.map(p => {
+      const byId   = p.authorId === req.params.id;
+      const byName = !p.authorId && oldNickname && p.author === oldNickname;
+      if (byId || byName) {
+        return { ...p, author: req.body.nickname, authorId: req.params.id };
+      }
+      return p;
+    });
     writeJSON(POSTS_FILE, updated);
   }
 

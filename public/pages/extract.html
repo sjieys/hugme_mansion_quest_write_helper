@@ -3,10 +3,76 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>안아줘요 동물맨션 — 이미지 자동 추출</title>
+  <title>안아줘요 동물맨션 — AI 자동 추출</title>
   <link rel="stylesheet" href="../styles/shared.css">
   <style>
     .container { max-width: 1000px; margin: 0 auto; padding: 24px 16px 60px; }
+
+    /* ── 사용 가이드 ── */
+    .guide-box {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-sm);
+      margin-bottom: 16px; overflow: hidden;
+    }
+    .guide-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 18px; cursor: pointer; user-select: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .guide-header:hover { background: var(--bg); }
+    .guide-title { font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .guide-toggle {
+      font-size: 11px; color: var(--text-muted); background: none;
+      border: none; cursor: pointer; padding: 0;
+    }
+    .guide-body { padding: 18px 20px; display: flex; gap: 24px; flex-wrap: wrap; }
+    .guide-body.hidden { display: none; }
+
+    .guide-examples { display: flex; gap: 10px; flex-shrink: 0; }
+    .guide-example {
+      width: 90px; border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--border); background: var(--bg);
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .guide-example img { width: 100%; max-height: 140px; object-fit: cover; object-position: top; display: block; }
+    .guide-example-label {
+      font-size: 10px; color: var(--text-muted); padding: 4px 6px;
+      text-align: center; line-height: 1.3;
+    }
+    .guide-example-placeholder {
+      width: 100px; height: 130px; border-radius: 8px;
+      border: 1.5px dashed var(--border); background: var(--bg);
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 4px; flex-shrink: 0;
+      font-size: 10px; color: var(--text-muted); text-align: center; padding: 8px;
+    }
+
+    .guide-steps { flex: 1; min-width: 220px; }
+    .guide-steps h4 { margin: 0 0 12px; font-size: 13px; }
+    .guide-step {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 8px 12px; border-radius: 8px; margin-bottom: 6px;
+      background: var(--bg); border: 1px solid var(--border);
+      font-size: 13px; line-height: 1.5;
+    }
+    .guide-step-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      font-size: 11px; font-weight: 700; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .guide-step.warn-step {
+      background: #fff7ed; border-color: #fed7aa;
+    }
+    .guide-step.warn-step .guide-step-num { background: #ea580c; }
+    .guide-warn-text {
+      font-weight: 700; color: #c2410c;
+    }
+    .guide-warn-badge {
+      display: inline-block; background: #fef2f2; color: #b91c1c;
+      border: 1px solid #fca5a5; border-radius: 6px;
+      font-size: 11px; font-weight: 800; padding: 1px 7px; margin-left: 4px;
+    }
 
     /* ── 설정 바 ── */
     .settings-bar {
@@ -133,7 +199,7 @@
       padding: 4px 6px; min-width: 50px; font-size: 11px; text-align: center;
     }
     .mini-item.not-matched { border-color: #fcd34d; background: #fffbeb; }
-    .mini-item img { width: 32px; height: 32px; object-fit: contain; image-rendering: pixelated; }
+    .mini-item img { width: 32px; height: 32px; object-fit: contain; image-rendering: pixelated; background: #F8F1DF; border-radius: 4px; }
     .mini-item .item-name { color: var(--text-muted); max-width: 70px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .mini-item .item-count { font-weight: 700; color: var(--text); font-size: 12px; }
     .no-item { font-size: 12px; color: var(--text-muted); }
@@ -196,7 +262,7 @@
       border-radius: 8px; padding: 4px 6px; font-size: 11px;
     }
     .edit-chip.not-matched { border-color: #fcd34d; background: #fffbeb; }
-    .edit-chip img { width: 28px; height: 28px; object-fit: contain; image-rendering: pixelated; flex-shrink: 0; }
+    .edit-chip img { width: 28px; height: 28px; object-fit: contain; image-rendering: pixelated; flex-shrink: 0; background: #F8F1DF; border-radius: 4px; }
     .edit-chip .chip-name {
       max-width: 70px; overflow: hidden; text-overflow: ellipsis;
       white-space: nowrap; color: var(--text-muted);
@@ -237,7 +303,7 @@
       transition: background 0.1s, border-color 0.1s;
     }
     .picker-item:hover { background: var(--accent-light); border-color: var(--accent); }
-    .picker-item img { width: 30px; height: 30px; object-fit: contain; image-rendering: pixelated; }
+    .picker-item img { width: 30px; height: 30px; object-fit: contain; image-rendering: pixelated; background: #F8F1DF; border-radius: 4px; }
     .picker-item span { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: var(--text-muted); }
 
     .edit-actions { display: flex; gap: 8px; margin-top: 10px; }
@@ -262,7 +328,7 @@
   <nav id="nav">
     <span class="nav-logo">🏠 동물맨션</span>
     <a href="main.html">홈</a>
-    <a href="view.html">퀘스트 작성</a>
+    <a href="view.html">직접 작성</a>
     <a href="extract.html" class="active">자동 추출</a>
     <a href="board.html">선발대 게시판</a>
     <a href="official.html">퀘스트 게시판</a>
@@ -276,6 +342,66 @@
   </nav>
 
   <div class="container">
+
+    <!-- 사용 가이드 -->
+    <div class="guide-box" id="guide-box">
+      <div class="guide-header" id="guide-header">
+        <span class="guide-title">📋 사용 가이드 — AI 자동 추출이란?</span>
+        <button class="guide-toggle" id="guide-toggle">접기 ▲</button>
+      </div>
+      <div class="guide-body" id="guide-body">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px">어떤 사진을 올리나요?</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start">
+            <div class="guide-example">
+              <img src="../images/guide/example1.jpg" alt="퀘스트 팝업 예시 1">
+              <div class="guide-example-label">팝업 전체 화면</div>
+            </div>
+            <div class="guide-example">
+              <img src="../images/guide/example2.jpg" alt="퀘스트 팝업 예시 2">
+              <div class="guide-example-label">외전 시나리오형</div>
+            </div>
+            <div class="guide-example">
+              <img src="../images/guide/example3.jpg" alt="퀘스트 팝업 예시 3">
+              <div class="guide-example-label">아이템 클로즈업</div>
+            </div>
+            <div style="font-size:12px;color:var(--text-muted);line-height:1.8;padding-top:4px;max-width:180px">
+              게임 내 <b>퀘스트 팝업 화면</b>을 캡처하세요.<br>
+              미션 아이템과 보상 아이템이 모두 보여야 합니다.<br>
+              <span style="color:var(--accent);font-weight:600">여러 장을 한 번에 업로드</span>할 수 있어요.
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-steps">
+          <h4>이용 순서</h4>
+          <div class="guide-step">
+            <span class="guide-step-num">1</span>
+            <span>층수·구분 설정 후 퀘스트 팝업 스크린샷 업로드</span>
+          </div>
+          <div class="guide-step">
+            <span class="guide-step-num">2</span>
+            <span><b>Gemini로 추출 시작</b> 클릭 → AI가 아이템 자동 분석</span>
+          </div>
+          <div class="guide-step warn-step">
+            <span class="guide-step-num">3</span>
+            <div>
+              <span class="guide-warn-text">⚠️ 추출 결과 반드시 검수!</span>
+              <span class="guide-warn-badge">필수</span>
+              <div style="font-size:12px;margin-top:3px;color:#9a3412;font-weight:500">
+                AI가 아이템을 잘못 인식하는 경우가 빈번합니다.<br>
+                각 행의 <b>수정</b> 버튼으로 원본 이미지를 보며 직접 확인하세요.
+              </div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="guide-step-num">4</span>
+            <span>항목에 이상 없는지 체크 후 <b>등록하기</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="settings-bar">
       <label>
         층수

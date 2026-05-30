@@ -36,6 +36,21 @@ let pendingFiles = [];
 let results      = [];
 let isProcessing = false;
 
+// ── 가이드 접기/펼치기 ───────────────────────────────────
+const guideBody   = document.getElementById('guide-body');
+const guideToggle = document.getElementById('guide-toggle');
+const GUIDE_KEY   = 'guide_collapsed';
+
+if (localStorage.getItem(GUIDE_KEY) === '1') {
+  guideBody.classList.add('hidden');
+  guideToggle.textContent = '펼치기 ▼';
+}
+document.getElementById('guide-header').addEventListener('click', () => {
+  const collapsed = guideBody.classList.toggle('hidden');
+  guideToggle.textContent = collapsed ? '펼치기 ▼' : '접기 ▲';
+  localStorage.setItem(GUIDE_KEY, collapsed ? '1' : '0');
+});
+
 // ── 아이템 카탈로그 로드 ─────────────────────────────────
 let allItemsFlat = [];
 fetch('/data').then(r => r.json()).then(data => {
@@ -214,13 +229,14 @@ function renderResults() {
             <p class="error-msg">${desc}</p>
           </div>
         </div>
-        <div class="result-status"><span class="badge badge-err">실패</span></div>`;
+        <div class="result-status"><span class="badge badge-err">실패</span></div>
+        <button class="edit-btn-toggle" data-idx="${idx}">수정</button>`;
     }
 
     wrapper.appendChild(row);
 
-    // ─ 수정 패널 (성공 행만) ─
-    if (r.success) {
+    // ─ 수정 패널 (성공/실패 모두) ─
+    {
       const panel = document.createElement('div');
       panel.className = 'edit-panel';
       panel.id = `edit-panel-${idx}`;

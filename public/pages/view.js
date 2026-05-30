@@ -36,7 +36,6 @@ const copyBtn      = document.getElementById("btn-copy");
 const saveBtn      = document.getElementById("btn-save");
 const loadsBtn     = document.getElementById("btn-loads");
 const registerBtn  = document.getElementById("btn-register");
-const statusSelect = document.getElementById("status-select");
 const searchInput  = document.getElementById("search-input");
 const floorInput   = document.getElementById("floor-input");
 const typeSelect   = document.getElementById("type-select");
@@ -49,10 +48,6 @@ let selectedPlusReward = null;
 let selectedRewardItem = null;
 let selectedItem       = null;
 let editWasOfficial    = false;
-
-if (!isAdmin()) {
-  statusSelect.style.display = 'none';
-}
 
 // ── 모바일 탭 전환 ───────────────────────────────────────
 const sidebarEl     = document.getElementById('sidebar');
@@ -92,7 +87,6 @@ if (editId) {
   if (raw) {
     const post = JSON.parse(raw);
     restoreState(post);
-    statusSelect.value = post.status || 'draft';
     editWasOfficial = post.isOfficial || false;
     sessionStorage.removeItem('edit_post');
   }
@@ -455,11 +449,8 @@ registerBtn.addEventListener('click', async () => {
 
   const author = getUsername() || me?.email || '익명';
 
-  let status = statusSelect.value;
-  if (!isAdmin()) {
-    const hasMore = await showConfirm('모든 퀘스트 작성을 완료했나요?\n\n예 → 검토 요청\n아니오 → 작성 중');
-    status = hasMore ? 'review' : 'draft';
-  }
+  const hasMore = await showConfirm('모든 퀘스트 작성을 완료했나요?\n\n예 → 검토 요청\n아니오 → 작성 중');
+  const status = hasMore ? 'review' : 'draft';
 
   const payload = {
     author,

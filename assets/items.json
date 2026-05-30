@@ -165,7 +165,7 @@
         "id": "construction_light_06",
         "name": "Construction light06",
         "img": "../assets/images/construction_light_06.png",
-        "description": "전등 6레벨"
+        "description": "무드등 (전등 6레벨)"
       }
     ],
     "건축재료": [
@@ -817,7 +817,7 @@
         "id": "vaccine_08",
         "name": "Vaccine 08",
         "img": "../assets/images/vaccine_08.png",
-        "description": "백신 8레벨"
+        "description": "정화 모듈 (백신 8레벨)"
       }
     ],
     "바이러스": [
