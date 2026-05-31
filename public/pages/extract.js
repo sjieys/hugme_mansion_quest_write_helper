@@ -71,9 +71,11 @@ async function refreshUsage() {
 }
 function updateUsageBadge(count, limit) {
   const pct = Math.min(100, Math.round((count / limit) * 100));
-  usageText.textContent = `오늘 ${count} / ${limit}`;
+  const remaining = Math.max(0, limit - count);
+  usageText.textContent = pct >= 70 ? `${remaining}장 남음` : `${count} / ${limit}장`;
   usageBar.style.width  = pct + '%';
   usageBar.className    = 'usage-bar-fill' + (pct >= 90 ? ' danger' : pct >= 70 ? ' warn' : '');
+  usageText.className   = 'usage-count'    + (pct >= 90 ? ' danger' : pct >= 70 ? ' warn' : '');
   usageBadge.style.display = '';
 }
 refreshUsage();
