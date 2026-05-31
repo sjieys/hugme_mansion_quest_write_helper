@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>안아줘요 동물맨션 — AI 자동 추출</title>
+  <title>안아줘요 동물맨션 — 이미지 추출</title>
   <link rel="stylesheet" href="../styles/shared.css">
   <style>
     .container { max-width: 1000px; margin: 0 auto; padding: 24px 16px 60px; }
@@ -304,7 +304,7 @@
     }
     .picker-item:hover { background: var(--accent-light); border-color: var(--accent); }
     .picker-item img { width: 30px; height: 30px; object-fit: contain; image-rendering: pixelated; background: #F8F1DF; border-radius: 4px; }
-    .picker-item span { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: var(--text-muted); }
+    .picker-item span { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; color: var(--text-muted); }
 
     .edit-actions { display: flex; gap: 8px; margin-top: 10px; }
     .edit-actions .btn { height: 32px; font-size: 13px; }
@@ -329,7 +329,7 @@
     <span class="nav-logo">🏠 동물맨션</span>
     <a href="main.html">홈</a>
     <a href="view.html">직접 작성</a>
-    <a href="extract.html" class="active">자동 추출</a>
+    <a href="extract.html" class="active">이미지 추출</a>
     <a href="board.html">선발대 게시판</a>
     <a href="official.html">퀘스트 게시판</a>
     <a href="progress.html">진척도</a>
@@ -346,7 +346,7 @@
     <!-- 사용 가이드 -->
     <div class="guide-box" id="guide-box">
       <div class="guide-header" id="guide-header">
-        <span class="guide-title">📋 사용 가이드 — AI 자동 추출이란?</span>
+        <span class="guide-title">📋 사용 가이드 — 이미지 추출이란?</span>
         <button class="guide-toggle" id="guide-toggle">접기 ▲</button>
       </div>
       <div class="guide-body" id="guide-body">

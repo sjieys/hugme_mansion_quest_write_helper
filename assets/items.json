@@ -1196,6 +1196,44 @@
         "description": "20코인 (코인 3레벨)",
         "quickQty": true
       }
+    ],
+    "타임 부스터": [
+      {
+        "id": "TimeBooster01",
+        "name": "TimeBooster01",
+        "img": "../assets/images/TimeBooster01.png",
+        "description": "부러진 타임 부스터 (타임 부스터 1레벨)"
+      },
+      {
+        "id": "TimeBooster02",
+        "name": "TimeBooster02",
+        "img": "../assets/images/TimeBooster02.png",
+        "description": "10분 타임 부스터 (타임 부스터 2레벨)"
+      },
+      {
+        "id": "TimeBooster03",
+        "name": "TimeBooster03",
+        "img": "../assets/images/TimeBooster03.png",
+        "description": "30분 타임 부스터 (타임 부스터 3레벨)"
+      },
+      {
+        "id": "TimeBooster04",
+        "name": "TimeBooster04",
+        "img": "../assets/images/TimeBooster04.png",
+        "description": "1시간 타임 부스터 (타임 부스터 4레벨)"
+      },
+      {
+        "id": "TimeBooster05",
+        "name": "TimeBooster05",
+        "img": "../assets/images/TimeBooster05.png",
+        "description": "2시간 타임 부스터 (타임 부스터 5레벨)"
+      },
+      {
+        "id": "TimeBooster06",
+        "name": "TimeBooster06",
+        "img": "../assets/images/TimeBooster06.png",
+        "description": "4시간 타임 부스터 (타임 부스터 6레벨)"
+      }
     ]
   }
 }
