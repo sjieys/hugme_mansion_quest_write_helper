@@ -51,26 +51,41 @@ if (!fs.existsSync(PROGRESS_FILE)) writeJSON(PROGRESS_FILE, {});
 if (!fs.existsSync(USERS_FILE))    writeJSON(USERS_FILE, {});
 
 // ── Gemini 일일 사용량 추적 ───────────────────────────────
-const DAILY_LIMIT = parseInt(process.env.GEMINI_DAILY_LIMIT || "200", 10);
+const DAILY_LIMIT      = parseInt(process.env.GEMINI_DAILY_LIMIT      || "200", 10);
+const USER_DAILY_LIMIT = parseInt(process.env.GEMINI_USER_DAILY_LIMIT || "100", 10);
 
 function getUsage() {
   const today = new Date().toISOString().slice(0, 10);
-  const stored = readJSON(USAGE_FILE, { date: "", count: 0 });
-  if (stored.date !== today) return { date: today, count: 0 };
+  const stored = readJSON(USAGE_FILE, { date: "", global: 0, users: {} });
+  if (stored.date !== today) return { date: today, global: 0, users: {} };
+  // 구버전 호환 (count 필드만 있는 경우)
+  if (stored.count != null && stored.global == null) {
+    return { date: today, global: stored.count, users: {} };
+  }
   return stored;
 }
 
-function incrementUsage() {
+function incrementUsage(userId) {
   const usage = getUsage();
-  usage.count += 1;
+  usage.global += 1;
+  if (userId) usage.users[userId] = (usage.users[userId] || 0) + 1;
   writeJSON(USAGE_FILE, usage);
-  return usage.count;
+  return { global: usage.global, user: usage.users[userId] || 1 };
 }
 
 // 사용량 조회 API
 app.get("/api/gemini-usage", (req, res) => {
   const usage = getUsage();
-  res.json({ count: usage.count, limit: DAILY_LIMIT, remaining: Math.max(0, DAILY_LIMIT - usage.count) });
+  const userId = req.query.userId;
+  const userCount = userId ? (usage.users[userId] || 0) : null;
+  res.json({
+    count: usage.global,
+    limit: DAILY_LIMIT,
+    remaining: Math.max(0, DAILY_LIMIT - usage.global),
+    userCount,
+    userLimit: USER_DAILY_LIMIT,
+    userRemaining: userCount != null ? Math.max(0, USER_DAILY_LIMIT - userCount) : null,
+  });
 });
 
 // ── 앱 설정 (클라이언트 ID 노출) ─────────────────────────
@@ -237,14 +252,25 @@ app.post("/api/extract-quests", async (req, res) => {
   if (!genAI) return res.status(503).json({ error: "GEMINI_API_KEY가 설정되지 않았습니다" });
 
   const usage = getUsage();
-  if (usage.count >= DAILY_LIMIT) {
+  if (usage.global >= DAILY_LIMIT) {
     return res.status(429).json({
-      error: `일일 한도 초과 (${DAILY_LIMIT}회/일). 내일 다시 시도하거나 .env의 GEMINI_DAILY_LIMIT을 늘려주세요.`,
+      error: `서비스 일일 한도 초과 (${DAILY_LIMIT}회/일). 내일 다시 시도해주세요.`,
       limitExceeded: true,
     });
   }
 
-  const { image } = req.body;
+  const { image, userId } = req.body;
+
+  if (userId) {
+    const userCount = usage.users[userId] || 0;
+    if (userCount >= USER_DAILY_LIMIT) {
+      return res.status(429).json({
+        error: `개인 일일 한도 초과 (${USER_DAILY_LIMIT}장/일). 내일 다시 시도해주세요.`,
+        limitExceeded: true,
+        userLimitExceeded: true,
+      });
+    }
+  }
   if (!image?.data || !image?.mimeType) {
     return res.status(400).json({ error: "이미지 데이터가 필요합니다" });
   }
@@ -307,13 +333,15 @@ ${itemListStr}
       };
     });
 
-    const used = incrementUsage();
+    const used = incrementUsage(userId);
     res.json({
-      success:   true,
-      slots:     mapItems(parsed.mission),
-      rewards:   mapItems(parsed.rewards),
-      usageToday: used,
-      dailyLimit: DAILY_LIMIT,
+      success:      true,
+      slots:        mapItems(parsed.mission),
+      rewards:      mapItems(parsed.rewards),
+      usageToday:   used.global,
+      dailyLimit:   DAILY_LIMIT,
+      userUsage:    used.user,
+      userLimit:    USER_DAILY_LIMIT,
     });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });

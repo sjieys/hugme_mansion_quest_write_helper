@@ -62,8 +62,11 @@ fetch('/data').then(r => r.json()).then(data => {
 // ── 사용량 표시 ──────────────────────────────────────────
 async function refreshUsage() {
   try {
-    const d = await fetch('/api/gemini-usage').then(r => r.json());
-    updateUsageBadge(d.count, d.limit);
+    const url = me?.id ? `/api/gemini-usage?userId=${encodeURIComponent(me.id)}` : '/api/gemini-usage';
+    const d = await fetch(url).then(r => r.json());
+    const count = d.userCount ?? d.count;
+    const limit = d.userLimit ?? d.limit;
+    updateUsageBadge(count, limit);
   } catch { /* 무시 */ }
 }
 function updateUsageBadge(count, limit) {
@@ -134,10 +137,11 @@ processBtn.addEventListener('click', async () => {
       const resp   = await fetch('/api/extract-quests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image: { data: base64, mimeType: file.type } }),
+        body: JSON.stringify({ image: { data: base64, mimeType: file.type }, userId: me?.id }),
       });
       const data = await resp.json();
-      if (data.usageToday != null) updateUsageBadge(data.usageToday, data.dailyLimit);
+      if (data.userUsage != null) updateUsageBadge(data.userUsage, data.userLimit);
+      else if (data.usageToday != null) updateUsageBadge(data.usageToday, data.dailyLimit);
       results.push({ file, url: URL.createObjectURL(file), ...data, include: data.success });
     } catch (err) {
       results.push({ file, url: URL.createObjectURL(file), success: false, error: err.message, include: false });
