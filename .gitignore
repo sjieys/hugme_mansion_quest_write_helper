@@ -6,3 +6,6 @@ assets/gemini_usage.json
 assets/users.json
 assets/images/desktop.ini
 TODO.txt
+
+# Fly.io
+.fly/

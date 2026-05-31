@@ -32,11 +32,18 @@ function writeJSON(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
 }
 
+// DATA_DIR: 배포 환경에서는 영구 볼륨 경로, 로컬에서는 assets/
+const DATA_DIR   = process.env.DATA_DIR
+  ? path.resolve(process.env.DATA_DIR)
+  : path.join(__dirname, "assets");
+
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+
 const ITEMS_FILE    = path.join(__dirname, "assets/items.json");
-const POSTS_FILE    = path.join(__dirname, "assets/posts.json");
-const PROGRESS_FILE = path.join(__dirname, "assets/progress.json");
-const USERS_FILE    = path.join(__dirname, "assets/users.json");
-const USAGE_FILE    = path.join(__dirname, "assets/gemini_usage.json");
+const POSTS_FILE    = path.join(DATA_DIR, "posts.json");
+const PROGRESS_FILE = path.join(DATA_DIR, "progress.json");
+const USERS_FILE    = path.join(DATA_DIR, "users.json");
+const USAGE_FILE    = path.join(DATA_DIR, "gemini_usage.json");
 
 // 데이터 파일 초기화
 if (!fs.existsSync(POSTS_FILE))    writeJSON(POSTS_FILE, []);
