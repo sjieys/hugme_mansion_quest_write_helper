@@ -1,6 +1,5 @@
 node_modules/
 .env
-assets/posts.json
 assets/progress.json
 assets/gemini_usage.json
 assets/users.json
