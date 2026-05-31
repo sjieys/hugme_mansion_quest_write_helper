@@ -231,6 +231,20 @@ app.post("/api/progress/:user", (req, res) => {
   res.json({ ok: true });
 });
 
+// ── 데이터 마이그레이션 (임시) ───────────────────────────────
+app.post("/api/admin/import", (req, res) => {
+  const { token, file, data } = req.body;
+  if (!token || token !== process.env.IMPORT_TOKEN) {
+    return res.status(403).json({ error: "Forbidden" });
+  }
+  const parsed = JSON.parse(data);
+  const map = { posts: POSTS_FILE, users: USERS_FILE, progress: PROGRESS_FILE };
+  if (!map[file]) return res.status(400).json({ error: "Unknown file" });
+  writeJSON(map[file], parsed);
+  const count = Array.isArray(parsed) ? parsed.length : Object.keys(parsed).length;
+  res.json({ ok: true, file, count });
+});
+
 // ── Gemini 퀘스트 자동 추출 ───────────────────────────────
 app.post("/api/extract-quests", async (req, res) => {
   if (!genAI) return res.status(503).json({ error: "GEMINI_API_KEY가 설정되지 않았습니다" });
