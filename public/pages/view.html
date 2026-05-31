@@ -12,8 +12,6 @@
     <a href="main.html" id="toolbar-home">← 홈</a>
     <span id="toolbar-title">퀘스트 직접 작성</span>
     <nav id="toolbar-actions">
-      <button type="button" id="btn-save">임시저장</button>
-      <button type="button" id="btn-loads" style="display:none">임시 0</button>
       <button type="button" id="btn-register">등록</button>
       <button type="button" id="btn-copy">텍스트로 복사</button>
     </nav>
@@ -60,18 +58,7 @@
     </div>
   </div>
 
-  <!-- 임시저장 목록 모달 -->
-  <div id="save-modal" class="modal-overlay" style="display:none">
-    <div class="modal-box">
-      <div class="modal-header">
-        <span>임시저장 목록</span>
-        <button id="modal-close">✕</button>
-      </div>
-      <ul id="save-list"></ul>
-    </div>
-  </div>
-
-  <div id="mobile-tabs">
+<div id="mobile-tabs">
     <button class="mobile-tab active" data-tab="sidebar">
       <span class="mobile-tab-icon">📋</span>
       <span class="mobile-tab-label">퀘스트 목록</span>

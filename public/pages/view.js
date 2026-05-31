@@ -33,15 +33,10 @@ document.getElementById('btn-logout')?.addEventListener('click', logout);
 const questList    = document.getElementById("quest-item-list");
 const catalog      = document.getElementById("catalog");
 const copyBtn      = document.getElementById("btn-copy");
-const saveBtn      = document.getElementById("btn-save");
-const loadsBtn     = document.getElementById("btn-loads");
 const registerBtn  = document.getElementById("btn-register");
 const searchInput  = document.getElementById("search-input");
 const floorInput   = document.getElementById("floor-input");
 const typeSelect   = document.getElementById("type-select");
-const saveModal    = document.getElementById("save-modal");
-const saveList     = document.getElementById("save-list");
-const modalClose   = document.getElementById("modal-close");
 
 let selectedPlusItem   = null;
 let selectedPlusReward = null;
@@ -78,7 +73,6 @@ initMobileTabs();
 const data = await returnData();
 renderCategories(data, catalog.id);
 questList.appendChild(returnQuest());
-updateLoadsBtn();
 
 // ── 수정 모드 복원 ───────────────────────────────────────
 const editId = new URLSearchParams(location.search).get('edit');
@@ -343,18 +337,6 @@ function fallbackCopy(text, onSuccess) {
   onSuccess();
 }
 
-// ── 임시저장 ────────────────────────────────────────────
-const SAVE_KEY = "quest_helper_saves";
-
-function getSaves() {
-  try { return JSON.parse(localStorage.getItem(SAVE_KEY) || "[]"); }
-  catch { return []; }
-}
-
-function setSaves(saves) {
-  localStorage.setItem(SAVE_KEY, JSON.stringify(saves));
-}
-
 function getCurrentState() {
   const quests = [...questList.querySelectorAll(".quest-item")].map(quest => {
     const slots = [...quest.querySelectorAll(".quest-top > .item, .quest-top > .plus-item")].map(slot => {
@@ -406,41 +388,6 @@ function restoreState(state) {
   questList.appendChild(returnQuest()); // 빈 퀘스트 자동 추가
 }
 
-function updateLoadsBtn() {
-  const n = getSaves().length;
-  loadsBtn.textContent = `임시 ${n}`;
-  loadsBtn.style.display = n > 0 ? "" : "none";
-}
-
-saveBtn.addEventListener("click", () => {
-  const state = getCurrentState();
-  if (state.quests.length === 0) { alert("저장할 퀘스트가 없습니다."); return; }
-
-  const title = [
-    state.floor ? state.floor + "층" : "",
-    state.type  || "",
-    new Date().toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" }),
-  ].filter(Boolean).join(" ");
-
-  const saves = getSaves();
-  saves.push({ ...state, title });
-  setSaves(saves);
-  updateLoadsBtn();
-
-  const orig = saveBtn.textContent;
-  saveBtn.textContent = "저장됨 ✓";
-  setTimeout(() => { saveBtn.textContent = orig; }, 1500);
-});
-
-loadsBtn.addEventListener("click", () => {
-  renderSaveList();
-  saveModal.style.display = "flex";
-});
-
-modalClose.addEventListener("click", () => { saveModal.style.display = "none"; });
-saveModal.addEventListener("click", (e) => {
-  if (e.target === saveModal) saveModal.style.display = "none";
-});
 
 // ── 등록 ─────────────────────────────────────────────────
 registerBtn.addEventListener('click', async () => {
@@ -479,43 +426,3 @@ registerBtn.addEventListener('click', async () => {
   location.href = 'board.html';
 });
 
-function renderSaveList() {
-  const saves = getSaves();
-  saveList.innerHTML = "";
-  if (saves.length === 0) {
-    saveList.innerHTML = "<li class='save-empty'>저장된 항목이 없습니다.</li>";
-    return;
-  }
-  saves.forEach((save, i) => {
-    const li = document.createElement("li");
-    li.className = "save-entry";
-
-    const title = document.createElement("span");
-    title.className = "save-title";
-    title.textContent = save.title || "저장 " + (i + 1);
-
-    const loadBtn = document.createElement("button");
-    loadBtn.className = "save-load";
-    loadBtn.textContent = "불러오기";
-    loadBtn.addEventListener("click", () => {
-      restoreState(save);
-      saveModal.style.display = "none";
-    });
-
-    const delBtn = document.createElement("button");
-    delBtn.className = "save-del";
-    delBtn.textContent = "삭제";
-    delBtn.addEventListener("click", () => {
-      const arr = getSaves();
-      arr.splice(i, 1);
-      setSaves(arr);
-      updateLoadsBtn();
-      renderSaveList();
-    });
-
-    li.appendChild(title);
-    li.appendChild(loadBtn);
-    li.appendChild(delBtn);
-    saveList.appendChild(li);
-  });
-}
