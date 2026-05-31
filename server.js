@@ -231,18 +231,6 @@ app.post("/api/progress/:user", (req, res) => {
   res.json({ ok: true });
 });
 
-// ── 데이터 마이그레이션 (임시) ───────────────────────────────
-app.post("/api/admin/import/:file", (req, res) => {
-  const { token } = req.query;
-  if (!token || token !== process.env.IMPORT_TOKEN) {
-    return res.status(403).json({ error: "Forbidden" });
-  }
-  const map = { posts: POSTS_FILE, users: USERS_FILE, progress: PROGRESS_FILE };
-  if (!map[req.params.file]) return res.status(400).json({ error: "Unknown file" });
-  writeJSON(map[req.params.file], req.body);
-  const count = Array.isArray(req.body) ? req.body.length : Object.keys(req.body).length;
-  res.json({ ok: true, file: req.params.file, count });
-});
 
 // ── Gemini 퀘스트 자동 추출 ───────────────────────────────
 app.post("/api/extract-quests", async (req, res) => {
