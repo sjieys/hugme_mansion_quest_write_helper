@@ -18,11 +18,8 @@
 
 /* ── 리셋 ────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
-html { height: 100%; }
+html, body { height: 100%; margin: 0; }
 body {
-  margin: 0;
-  min-height: 100%;
-  min-height: 100dvh;
   display: grid;
   grid-template-rows: var(--toolbar-h) 1fr;
   grid-template-columns: var(--sidebar-w) 1fr;
@@ -33,7 +30,6 @@ body {
   font-size: 14px;
   color: var(--text);
   background: var(--bg);
-  overflow-x: hidden;
 }
 
 /* ── 툴바 ────────────────────────────────────────────── */
@@ -328,7 +324,7 @@ input.badge::-webkit-outer-spin-button { -webkit-appearance: none; appearance: n
 /* ── 모바일 탭 바 ─────────────────────────────────────── */
 #mobile-tabs { display: none; }
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   body {
     grid-template-columns: 1fr;
     grid-template-rows: var(--toolbar-h) 1fr 56px;
