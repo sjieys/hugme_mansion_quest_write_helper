@@ -48,8 +48,14 @@ let editWasOfficial    = false;
 const sidebarEl     = document.getElementById('sidebar');
 const contentAreaEl = document.getElementById('content-area');
 
+const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
+
+function applyMobileClass() {
+  document.body.classList.toggle('is-mobile', isMobile());
+}
+
 function initMobileTabs() {
-  if (!window.matchMedia('(max-width: 767px)').matches) return;
+  if (!isMobile()) return;
   sidebarEl.classList.add('tab-active');
   document.querySelectorAll('.mobile-tab').forEach(tab => {
     tab.addEventListener('click', () => {
@@ -63,10 +69,12 @@ function initMobileTabs() {
 }
 
 function switchToQuestTab() {
-  if (!window.matchMedia('(max-width: 767px)').matches) return;
+  if (!isMobile()) return;
   document.querySelector('.mobile-tab[data-tab="sidebar"]')?.click();
 }
 
+applyMobileClass();
+window.matchMedia('(max-width: 767px)').addEventListener('change', applyMobileClass);
 initMobileTabs();
 
 // ── 초기화 ──────────────────────────────────────────────

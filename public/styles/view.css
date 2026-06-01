@@ -324,81 +324,72 @@ input.badge::-webkit-outer-spin-button { -webkit-appearance: none; appearance: n
 /* ── 모바일 탭 바 ─────────────────────────────────────── */
 #mobile-tabs { display: none; }
 
-@media (max-width: 767px) {
-  body {
-    grid-template-columns: 1fr;
-    grid-template-rows: var(--toolbar-h) 1fr 56px;
-    grid-template-areas:
-      "toolbar"
-      "main"
-      "tabs";
-    height: 100dvh;
-    overflow: hidden;
-  }
-
-  #sidebar {
-    grid-area: main;
-    display: none;
-    border-right: none;
-    border-top: 1px solid var(--border);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  #content-area {
-    grid-area: main;
-    display: none;
-    overflow: hidden;
-  }
-  #sidebar.tab-active    { display: flex; }
-  #content-area.tab-active { display: flex; }
-
-  #mobile-tabs {
-    grid-area: tabs;
-    display: flex;
-    border-top: 1px solid var(--border);
-    background: var(--card-bg);
-    z-index: 20;
-  }
-  .mobile-tab {
-    flex: 1; height: 56px; border: none; background: transparent;
-    font-size: 12px; font-weight: 600; color: var(--text-muted);
-    cursor: pointer;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-    transition: color 0.12s, background 0.12s;
-  }
-  .mobile-tab.active { color: var(--accent); background: var(--accent-light); }
-  .mobile-tab-icon { font-size: 18px; line-height: 1; }
-  .mobile-tab-label { font-size: 11px; }
-
-  /* 툴바 축소 */
-  .btn-label-full { display: none; }
-  .btn-label-short { display: inline; }
-  #toolbar { padding: 0 10px; gap: 4px; }
-  #toolbar-home { display: none; }
-  #toolbar-title { font-size: 13px; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  #toolbar-actions { gap: 4px; flex-shrink: 0; }
-  #toolbar-actions button { height: 32px; padding: 0 10px; font-size: 12px; }
-  #status-select { height: 32px; padding: 0 6px; font-size: 12px; }
-
-  /* 퀘스트 카드 */
-  #season-header { padding: 8px 10px; }
-  .quest-item { padding: 8px 8px 6px; }
-  .quest-top { grid-template-columns: 18px 1fr 1fr 28px; gap: 6px; }
-  .plus-item { font-size: 20px; }
-  .controls button { height: 26px; font-size: 15px; }
-  .quest-rewards { padding-left: 22px; }
-  .plus-reward { width: 44px; height: 44px; }
-  .reward-filled { width: 44px; }
-  .reward-thumb { width: 44px; height: 44px; }
+/* ── 모바일 레이아웃 (JS가 body.is-mobile 클래스 추가) ── */
+body.is-mobile {
+  grid-template-columns: 1fr;
+  grid-template-rows: var(--toolbar-h) 1fr 56px;
+  grid-template-areas:
+    "toolbar"
+    "main"
+    "tabs";
+  height: 100dvh;
+  overflow: hidden;
 }
 
-/* 매우 좁은 화면 (320px 이하) */
-@media (max-width: 360px) {
-  #toolbar-title { display: none; }
-  #toolbar-actions button { padding: 0 8px; font-size: 11px; }
-  .quest-top { gap: 4px; }
-  .controls button { height: 24px; }
+body.is-mobile #sidebar {
+  grid-area: main;
+  display: none;
+  border-right: none;
+  border-top: 1px solid var(--border);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
+body.is-mobile #content-area {
+  grid-area: main;
+  display: none;
+  overflow: hidden;
+}
+body.is-mobile #sidebar.tab-active    { display: flex; }
+body.is-mobile #content-area.tab-active { display: flex; }
+
+body.is-mobile #mobile-tabs {
+  grid-area: tabs;
+  display: flex;
+  border-top: 1px solid var(--border);
+  background: var(--card-bg);
+  z-index: 20;
+}
+.mobile-tab {
+  flex: 1; height: 56px; border: none; background: transparent;
+  font-size: 12px; font-weight: 600; color: var(--text-muted);
+  cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  transition: color 0.12s, background 0.12s;
+}
+.mobile-tab.active { color: var(--accent); background: var(--accent-light); }
+.mobile-tab-icon { font-size: 18px; line-height: 1; }
+.mobile-tab-label { font-size: 11px; }
+
+/* 툴바 축소 */
+body.is-mobile .btn-label-full { display: none; }
+body.is-mobile .btn-label-short { display: inline; }
+body.is-mobile #toolbar { padding: 0 10px; gap: 4px; }
+body.is-mobile #toolbar-home { display: none; }
+body.is-mobile #toolbar-title { font-size: 13px; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+body.is-mobile #toolbar-actions { gap: 4px; flex-shrink: 0; }
+body.is-mobile #toolbar-actions button { height: 32px; padding: 0 10px; font-size: 12px; }
+body.is-mobile #status-select { height: 32px; padding: 0 6px; font-size: 12px; }
+
+/* 퀘스트 카드 */
+body.is-mobile #season-header { padding: 8px 10px; }
+body.is-mobile .quest-item { padding: 8px 8px 6px; }
+body.is-mobile .quest-top { grid-template-columns: 18px 1fr 1fr 28px; gap: 6px; }
+body.is-mobile .plus-item { font-size: 20px; }
+body.is-mobile .controls button { height: 26px; font-size: 15px; }
+body.is-mobile .quest-rewards { padding-left: 22px; }
+body.is-mobile .plus-reward { width: 44px; height: 44px; }
+body.is-mobile .reward-filled { width: 44px; }
+body.is-mobile .reward-thumb { width: 44px; height: 44px; }
 
 /* + 퀘스트 추가 */
 .plus-quest {
