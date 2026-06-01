@@ -328,7 +328,7 @@ input.badge::-webkit-outer-spin-button { -webkit-appearance: none; appearance: n
 /* ── 모바일 탭 바 ─────────────────────────────────────── */
 #mobile-tabs { display: none; }
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
   body {
     grid-template-columns: 1fr;
     grid-template-rows: var(--toolbar-h) 1fr 56px;

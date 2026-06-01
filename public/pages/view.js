@@ -49,7 +49,7 @@ const sidebarEl     = document.getElementById('sidebar');
 const contentAreaEl = document.getElementById('content-area');
 
 function initMobileTabs() {
-  if (window.innerWidth > 767) return;
+  if (window.innerWidth > 900) return;
   sidebarEl.classList.add('tab-active');
   document.querySelectorAll('.mobile-tab').forEach(tab => {
     tab.addEventListener('click', () => {
@@ -63,7 +63,7 @@ function initMobileTabs() {
 }
 
 function switchToQuestTab() {
-  if (window.innerWidth > 767) return;
+  if (window.innerWidth > 900) return;
   document.querySelector('.mobile-tab[data-tab="sidebar"]')?.click();
 }
 
