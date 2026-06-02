@@ -12,7 +12,8 @@
             "img": "../assets/images/cleaning03.png",
             "name": "수세미 (청소도구 3레벨)",
             "count": 1
-          }
+          },
+          null
         ],
         "rewards": [
           {
@@ -28,7 +29,8 @@
             "img": "../assets/images/cleaning01.png",
             "name": "행주 (청소도구 1레벨)",
             "count": 2
-          }
+          },
+          null
         ],
         "rewards": [
           {
@@ -91,7 +93,8 @@
             "img": "../assets/images/seed_bag_01.png",
             "name": "씨앗봉투 (씨앗봉투 1레벨)",
             "count": 1
-          }
+          },
+          null
         ],
         "rewards": [
           {
@@ -100,10 +103,27 @@
             "count": 1
           }
         ]
+      },
+      {
+        "slots": [
+          {
+            "img": "../assets/images/plant_02.png",
+            "name": "발아 (식물 2레벨)",
+            "count": 1
+          },
+          null
+        ],
+        "rewards": [
+          {
+            "img": "../assets/images/exp04.png",
+            "name": "경험치 (경험치 4렙)",
+            "count": 1
+          }
+        ]
       }
     ],
     "status": "review",
-    "isOfficial": true,
+    "isOfficial": false,
     "createdAt": "2024-10-16T00:00:00.000Z",
     "updatedAt": "2024-10-16T00:00:00.000Z"
   },
@@ -3940,8 +3960,8 @@
     ],
     "status": "review",
     "isOfficial": true,
-    "createdAt": "2025-10-29T00:00:00.000Z",
-    "updatedAt": "2025-10-29T00:00:00.000Z"
+    "createdAt": "2024-10-29T00:00:00.000Z",
+    "updatedAt": "2024-10-29T00:00:00.000Z"
   },
   {
     "id": "e9f0a1b2-c3d4-4e5f-6789-abcdef012345",
