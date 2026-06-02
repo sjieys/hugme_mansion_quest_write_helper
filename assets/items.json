@@ -862,49 +862,49 @@
       {
         "id": "Pipe_01",
         "name": "Pipe 01",
-        "img": "../assets/images/../assets/images/construction_pipe01.png",
+        "img": "../assets/images/construction_pipe01.png",
         "description": "밸브 (배관 1레벨)"
       },
       {
         "id": "Pipe_02",
         "name": "Pipe 02",
-        "img": "../assets/images/../assets/images/construction_pipe02.png",
+        "img": "../assets/images/construction_pipe02.png",
         "description": "직선 파이프와 밸브 (배관 2레벨)"
       },
       {
         "id": "Pipe_03",
         "name": "Pipe 03",
-        "img": "../assets/images/../assets/images/construction_pipe03.png",
+        "img": "../assets/images/construction_pipe03.png",
         "description": "곡선 파이프와 밸브 (배관 3레벨)"
       },
       {
         "id": "Pipe_04",
         "name": "Pipe 04",
-        "img": "../assets/images/../assets/images/construction_pipe04.jpg",
+        "img": "../assets/images/construction_pipe04.jpg",
         "description": "수도꼭지 (배관 4레벨)"
       },
       {
         "id": "Pipe_05",
         "name": "Pipe 05",
-        "img": "../assets/images/../assets/images/construction_pipe05.png",
+        "img": "../assets/images/construction_pipe05.png",
         "description": "수도관 (배관 5레벨)"
       },
       {
         "id": "Pipe_06",
         "name": "Pipe 06",
-        "img": "../assets/images/../assets/images/construction_pipe06.png",
+        "img": "../assets/images/construction_pipe06.png",
         "description": "개수대 (배관 6레벨)"
       },
       {
         "id": "Pipe_07",
         "name": "Pipe 07",
-        "img": "../assets/images/../assets/images/construction_pipe07.png",
+        "img": "../assets/images/construction_pipe07.png",
         "description": "다목적 개수대 (배관 7레벨)"
       },
       {
         "id": "Pipe_08",
         "name": "Pipe 08",
-        "img": "../assets/images/../assets/images/construction_pipe08.png",
+        "img": "../assets/images/construction_pipe08.png",
         "description": "정원호수 (배관 8레벨)"
       }
     ],
@@ -1289,37 +1289,37 @@
       {
         "id": "TimeBooster01",
         "name": "TimeBooster01",
-        "img": "../assets/images/../assets/images/timer01.png",
+        "img": "../assets/images/timer01.png",
         "description": "부러진 타임 부스터 (타임 부스터 1레벨)"
       },
       {
         "id": "TimeBooster02",
         "name": "TimeBooster02",
-        "img": "../assets/images/../assets/images/timer02.png",
+        "img": "../assets/images/timer02.png",
         "description": "10분 타임 부스터 (타임 부스터 2레벨)"
       },
       {
         "id": "TimeBooster03",
         "name": "TimeBooster03",
-        "img": "../assets/images/../assets/images/timer03.png",
+        "img": "../assets/images/timer03.png",
         "description": "30분 타임 부스터 (타임 부스터 3레벨)"
       },
       {
         "id": "TimeBooster04",
         "name": "TimeBooster04",
-        "img": "../assets/images/../assets/images/timer04.png",
+        "img": "../assets/images/timer04.png",
         "description": "1시간 타임 부스터 (타임 부스터 4레벨)"
       },
       {
         "id": "TimeBooster05",
         "name": "TimeBooster05",
-        "img": "../assets/images/../assets/images/timer05.png",
+        "img": "../assets/images/timer05.png",
         "description": "2시간 타임 부스터 (타임 부스터 5레벨)"
       },
       {
         "id": "TimeBooster06",
         "name": "TimeBooster06",
-        "img": "../assets/images/../assets/images/timer06.png",
+        "img": "../assets/images/timer06.png",
         "description": "4시간 타임 부스터 (타임 부스터 6레벨)"
       }
     ],
