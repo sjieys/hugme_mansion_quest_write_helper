@@ -862,49 +862,49 @@
       {
         "id": "Pipe_01",
         "name": "Pipe 01",
-        "img": "../assets/images/Pipe_01.png",
+        "img": "../assets/images/../assets/images/construction_pipe01.png",
         "description": "밸브 (배관 1레벨)"
       },
       {
         "id": "Pipe_02",
         "name": "Pipe 02",
-        "img": "../assets/images/Pipe_02.png",
+        "img": "../assets/images/../assets/images/construction_pipe02.png",
         "description": "직선 파이프와 밸브 (배관 2레벨)"
       },
       {
         "id": "Pipe_03",
         "name": "Pipe 03",
-        "img": "../assets/images/Pipe_03.png",
+        "img": "../assets/images/../assets/images/construction_pipe03.png",
         "description": "곡선 파이프와 밸브 (배관 3레벨)"
       },
       {
         "id": "Pipe_04",
         "name": "Pipe 04",
-        "img": "../assets/images/Pipe_04.jpg",
+        "img": "../assets/images/../assets/images/construction_pipe04.jpg",
         "description": "수도꼭지 (배관 4레벨)"
       },
       {
         "id": "Pipe_05",
         "name": "Pipe 05",
-        "img": "../assets/images/Pipe_05.png",
+        "img": "../assets/images/../assets/images/construction_pipe05.png",
         "description": "수도관 (배관 5레벨)"
       },
       {
         "id": "Pipe_06",
         "name": "Pipe 06",
-        "img": "../assets/images/Pipe_06.png",
+        "img": "../assets/images/../assets/images/construction_pipe06.png",
         "description": "개수대 (배관 6레벨)"
       },
       {
         "id": "Pipe_07",
         "name": "Pipe 07",
-        "img": "../assets/images/Pipe_07.png",
+        "img": "../assets/images/../assets/images/construction_pipe07.png",
         "description": "다목적 개수대 (배관 7레벨)"
       },
       {
         "id": "Pipe_08",
         "name": "Pipe 08",
-        "img": "../assets/images/Pipe_08.png",
+        "img": "../assets/images/../assets/images/construction_pipe08.png",
         "description": "정원호수 (배관 8레벨)"
       }
     ],
@@ -1104,10 +1104,10 @@
     ],
     "보상": [
       {
-        "id": "reward_clover04",
-        "name": "reward_clover04",
-        "img": "../assets/images/reward_clover04.png",
-        "description": "50경험치 (경험치 4렙)",
+        "id": "exp04",
+        "name": "exp04",
+        "img": "../assets/images/exp04.png",
+        "description": "경험치 (경험치 4렙)",
         "quickQty": true
       },
       {
@@ -1125,7 +1125,7 @@
       {
         "id": "reward_scissors",
         "name": "reward_scissors",
-        "img": "../assets/images/reward_scissors.png",
+        "img": "../assets/images/scissors.png",
         "description": "가위"
       },
       {
@@ -1192,47 +1192,489 @@
       {
         "id": "coin_03",
         "name": "coin_03",
-        "img": "../assets/images/coin_03.png",
+        "img": "../assets/images/coin03.png",
         "description": "20코인 (코인 3레벨)",
         "quickQty": true
+      },
+      {
+        "id": "exp01",
+        "name": "exp01",
+        "img": "../assets/images/exp01.png",
+        "description": "경험치 (경험치 1렙)",
+        "quickQty": true
+      },
+      {
+        "id": "exp02",
+        "name": "exp02",
+        "img": "../assets/images/exp02.png",
+        "description": "경험치 (경험치 2렙)",
+        "quickQty": true
+      },
+      {
+        "id": "exp03",
+        "name": "exp03",
+        "img": "../assets/images/exp03.png",
+        "description": "경험치 (경험치 3렙)",
+        "quickQty": true
+      },
+      {
+        "id": "exp05",
+        "name": "exp05",
+        "img": "../assets/images/exp05.png",
+        "description": "경험치 (경험치 5렙)",
+        "quickQty": true
+      },
+      {
+        "id": "Reward_chest_blue01",
+        "name": "Reward_chest_blue01",
+        "img": "../assets/images/Reward_chest_blue01.png",
+        "description": "작은 파란 상자"
+      },
+      {
+        "id": "Reward_chest_blue02",
+        "name": "Reward_chest_blue02",
+        "img": "../assets/images/Reward_chest_blue02.png",
+        "description": "파란 상자"
+      },
+      {
+        "id": "Reward_chest_green01",
+        "name": "Reward_chest_green01",
+        "img": "../assets/images/Reward_chest_green01.png",
+        "description": "작은 초록 상자"
+      },
+      {
+        "id": "Reward_chest_green02",
+        "name": "Reward_chest_green02",
+        "img": "../assets/images/Reward_chest_green02.png",
+        "description": "초록 상자"
+      },
+      {
+        "id": "Reward_chest_red01",
+        "name": "Reward_chest_red01",
+        "img": "../assets/images/Reward_chest_red01.png",
+        "description": "작은 빨간 상자"
+      },
+      {
+        "id": "Reward_chest_red02",
+        "name": "Reward_chest_red02",
+        "img": "../assets/images/Reward_chest_red02.png",
+        "description": "빨간 상자"
+      },
+      {
+        "id": "energy_G00",
+        "name": "energy_G00",
+        "img": "../assets/images/energy_G00.png",
+        "description": "에너지 (특수)"
+      },
+      {
+        "id": "piggybank01",
+        "name": "piggybank01",
+        "img": "../assets/images/piggybank01.png",
+        "description": "저금통 (저금통 1레벨)"
+      },
+      {
+        "id": "piggybank02",
+        "name": "piggybank02",
+        "img": "../assets/images/piggybank02.png",
+        "description": "저금통 (저금통 2레벨)"
+      },
+      {
+        "id": "piggybank03",
+        "name": "piggybank03",
+        "img": "../assets/images/piggybank03.png",
+        "description": "저금통 (저금통 3레벨)"
       }
     ],
     "타임 부스터": [
       {
         "id": "TimeBooster01",
         "name": "TimeBooster01",
-        "img": "../assets/images/TimeBooster01.png",
+        "img": "../assets/images/../assets/images/timer01.png",
         "description": "부러진 타임 부스터 (타임 부스터 1레벨)"
       },
       {
         "id": "TimeBooster02",
         "name": "TimeBooster02",
-        "img": "../assets/images/TimeBooster02.png",
+        "img": "../assets/images/../assets/images/timer02.png",
         "description": "10분 타임 부스터 (타임 부스터 2레벨)"
       },
       {
         "id": "TimeBooster03",
         "name": "TimeBooster03",
-        "img": "../assets/images/TimeBooster03.png",
+        "img": "../assets/images/../assets/images/timer03.png",
         "description": "30분 타임 부스터 (타임 부스터 3레벨)"
       },
       {
         "id": "TimeBooster04",
         "name": "TimeBooster04",
-        "img": "../assets/images/TimeBooster04.png",
+        "img": "../assets/images/../assets/images/timer04.png",
         "description": "1시간 타임 부스터 (타임 부스터 4레벨)"
       },
       {
         "id": "TimeBooster05",
         "name": "TimeBooster05",
-        "img": "../assets/images/TimeBooster05.png",
+        "img": "../assets/images/../assets/images/timer05.png",
         "description": "2시간 타임 부스터 (타임 부스터 5레벨)"
       },
       {
         "id": "TimeBooster06",
         "name": "TimeBooster06",
-        "img": "../assets/images/TimeBooster06.png",
+        "img": "../assets/images/../assets/images/timer06.png",
         "description": "4시간 타임 부스터 (타임 부스터 6레벨)"
+      }
+    ],
+    "청소용구함": [
+      {
+        "id": "cleaning_G01",
+        "name": "cleaning_G01",
+        "img": "../assets/images/cleaning_G01.png",
+        "description": "청소용구함 (청소용구함 1레벨)"
+      },
+      {
+        "id": "cleaning_G02",
+        "name": "cleaning_G02",
+        "img": "../assets/images/cleaning_G02.png",
+        "description": "청소용구함 (청소용구함 2레벨)"
+      },
+      {
+        "id": "cleaning_G03",
+        "name": "cleaning_G03",
+        "img": "../assets/images/cleaning_G03.png",
+        "description": "청소용구함 (청소용구함 3레벨)"
+      },
+      {
+        "id": "cleaning_G04",
+        "name": "cleaning_G04",
+        "img": "../assets/images/cleaning_G04.png",
+        "description": "청소용구함 (청소용구함 4레벨)"
+      },
+      {
+        "id": "cleaning_G05",
+        "name": "cleaning_G05",
+        "img": "../assets/images/cleaning_G05.png",
+        "description": "청소용구함 (청소용구함 5레벨)"
+      },
+      {
+        "id": "cleaning_G06",
+        "name": "cleaning_G06",
+        "img": "../assets/images/cleaning_G06.png",
+        "description": "청소용구함 (청소용구함 6레벨)"
+      },
+      {
+        "id": "cleaning_G07",
+        "name": "cleaning_G07",
+        "img": "../assets/images/cleaning_G07.png",
+        "description": "청소용구함 (청소용구함 7레벨)"
+      },
+      {
+        "id": "cleaning_G08",
+        "name": "cleaning_G08",
+        "img": "../assets/images/cleaning_G08.png",
+        "description": "청소용구함 (청소용구함 8레벨)"
+      },
+      {
+        "id": "cleaning_G09",
+        "name": "cleaning_G09",
+        "img": "../assets/images/cleaning_G09.png",
+        "description": "청소용구함 (청소용구함 9레벨)"
+      },
+      {
+        "id": "cleaning_G10",
+        "name": "cleaning_G10",
+        "img": "../assets/images/cleaning_G10.png",
+        "description": "청소용구함 (청소용구함 10레벨)"
+      }
+    ],
+    "공사자재함": [
+      {
+        "id": "construction_G01",
+        "name": "construction_G01",
+        "img": "../assets/images/construction_G01.png",
+        "description": "공사자재함 (공사자재함 1레벨)"
+      },
+      {
+        "id": "construction_G02",
+        "name": "construction_G02",
+        "img": "../assets/images/construction_G02.png",
+        "description": "공사자재함 (공사자재함 2레벨)"
+      },
+      {
+        "id": "construction_G03",
+        "name": "construction_G03",
+        "img": "../assets/images/construction_G03.png",
+        "description": "공사자재함 (공사자재함 3레벨)"
+      },
+      {
+        "id": "construction_G04",
+        "name": "construction_G04",
+        "img": "../assets/images/construction_G04.png",
+        "description": "공사자재함 (공사자재함 4레벨)"
+      },
+      {
+        "id": "construction_G05",
+        "name": "construction_G05",
+        "img": "../assets/images/construction_G05.png",
+        "description": "공사자재함 (공사자재함 5레벨)"
+      },
+      {
+        "id": "construction_G06",
+        "name": "construction_G06",
+        "img": "../assets/images/construction_G06.png",
+        "description": "공사자재함 (공사자재함 6레벨)"
+      },
+      {
+        "id": "construction_G07",
+        "name": "construction_G07",
+        "img": "../assets/images/construction_G07.png",
+        "description": "공사자재함 (공사자재함 7레벨)"
+      },
+      {
+        "id": "construction_G08",
+        "name": "construction_G08",
+        "img": "../assets/images/construction_G08.png",
+        "description": "공사자재함 (공사자재함 8레벨)"
+      },
+      {
+        "id": "construction_G09",
+        "name": "construction_G09",
+        "img": "../assets/images/construction_G09.png",
+        "description": "공사자재함 (공사자재함 9레벨)"
+      }
+    ],
+    "쇼핑카트": [
+      {
+        "id": "Household_G01",
+        "name": "Household_G01",
+        "img": "../assets/images/Household_G01.png",
+        "description": "쇼핑카트 (쇼핑카트 1레벨)"
+      },
+      {
+        "id": "Household_G02",
+        "name": "Household_G02",
+        "img": "../assets/images/Household_G02.png",
+        "description": "쇼핑카트 (쇼핑카트 2레벨)"
+      },
+      {
+        "id": "Household_G03",
+        "name": "Household_G03",
+        "img": "../assets/images/Household_G03.png",
+        "description": "쇼핑카트 (쇼핑카트 3레벨)"
+      },
+      {
+        "id": "Household_G04",
+        "name": "Household_G04",
+        "img": "../assets/images/Household_G04.png",
+        "description": "쇼핑카트 (쇼핑카트 4레벨)"
+      },
+      {
+        "id": "Household_G05",
+        "name": "Household_G05",
+        "img": "../assets/images/Household_G05.png",
+        "description": "쇼핑카트 (쇼핑카트 5레벨)"
+      },
+      {
+        "id": "Household_G06",
+        "name": "Household_G06",
+        "img": "../assets/images/Household_G06.png",
+        "description": "쇼핑카트 (쇼핑카트 6레벨)"
+      },
+      {
+        "id": "Household_G07",
+        "name": "Household_G07",
+        "img": "../assets/images/Household_G07.png",
+        "description": "쇼핑카트 (쇼핑카트 7레벨)"
+      },
+      {
+        "id": "Household_G08",
+        "name": "Household_G08",
+        "img": "../assets/images/Household_G08.png",
+        "description": "쇼핑카트 (쇼핑카트 8레벨)"
+      },
+      {
+        "id": "Household_G09",
+        "name": "Household_G09",
+        "img": "../assets/images/Household_G09.png",
+        "description": "쇼핑카트 (쇼핑카트 9레벨)"
+      }
+    ],
+    "화분": [
+      {
+        "id": "plant_G01",
+        "name": "plant_G01",
+        "img": "../assets/images/plant_G01.png",
+        "description": "화분 (화분 1레벨)"
+      },
+      {
+        "id": "plant_G02",
+        "name": "plant_G02",
+        "img": "../assets/images/plant_G02.png",
+        "description": "화분 (화분 2레벨)"
+      },
+      {
+        "id": "plant_G03",
+        "name": "plant_G03",
+        "img": "../assets/images/plant_G03.png",
+        "description": "화분 (화분 3레벨)"
+      },
+      {
+        "id": "plant_G04",
+        "name": "plant_G04",
+        "img": "../assets/images/plant_G04.png",
+        "description": "화분 (화분 4레벨)"
+      },
+      {
+        "id": "plant_G05",
+        "name": "plant_G05",
+        "img": "../assets/images/plant_G05.png",
+        "description": "화분 (화분 5레벨)"
+      },
+      {
+        "id": "plant_G06",
+        "name": "plant_G06",
+        "img": "../assets/images/plant_G06.png",
+        "description": "화분 (화분 6레벨)"
+      },
+      {
+        "id": "plant_G07",
+        "name": "plant_G07",
+        "img": "../assets/images/plant_G07.png",
+        "description": "화분 (화분 7레벨)"
+      },
+      {
+        "id": "plant_G08",
+        "name": "plant_G08",
+        "img": "../assets/images/plant_G08.png",
+        "description": "화분 (화분 8레벨)"
+      },
+      {
+        "id": "plant_G09",
+        "name": "plant_G09",
+        "img": "../assets/images/plant_G09.png",
+        "description": "화분 (화분 9레벨)"
+      }
+    ],
+    "책가방": [
+      {
+        "id": "stationery_G01",
+        "name": "stationery_G01",
+        "img": "../assets/images/stationery_G01.png",
+        "description": "책가방 (책가방 1레벨)"
+      },
+      {
+        "id": "stationery_G02",
+        "name": "stationery_G02",
+        "img": "../assets/images/stationery_G02.png",
+        "description": "책가방 (책가방 2레벨)"
+      },
+      {
+        "id": "stationery_G03",
+        "name": "stationery_G03",
+        "img": "../assets/images/stationery_G03.png",
+        "description": "책가방 (책가방 3레벨)"
+      },
+      {
+        "id": "stationery_G04",
+        "name": "stationery_G04",
+        "img": "../assets/images/stationery_G04.png",
+        "description": "책가방 (책가방 4레벨)"
+      },
+      {
+        "id": "stationery_G05",
+        "name": "stationery_G05",
+        "img": "../assets/images/stationery_G05.png",
+        "description": "책가방 (책가방 5레벨)"
+      },
+      {
+        "id": "stationery_G06",
+        "name": "stationery_G06",
+        "img": "../assets/images/stationery_G06.png",
+        "description": "책가방 (책가방 6레벨)"
+      },
+      {
+        "id": "stationery_G07",
+        "name": "stationery_G07",
+        "img": "../assets/images/stationery_G07.png",
+        "description": "책가방 (책가방 7레벨)"
+      },
+      {
+        "id": "stationery_G08",
+        "name": "stationery_G08",
+        "img": "../assets/images/stationery_G08.png",
+        "description": "책가방 (책가방 8레벨)"
+      },
+      {
+        "id": "stationery_G09",
+        "name": "stationery_G09",
+        "img": "../assets/images/stationery_G09.png",
+        "description": "책가방 (책가방 9레벨)"
+      },
+      {
+        "id": "stationery_G10",
+        "name": "stationery_G10",
+        "img": "../assets/images/stationery_G10.png",
+        "description": "책가방 (책가방 10레벨)"
+      }
+    ],
+    "공구상자": [
+      {
+        "id": "tool_G01",
+        "name": "tool_G01",
+        "img": "../assets/images/tool_G01.png",
+        "description": "공구상자 (공구상자 1레벨)"
+      },
+      {
+        "id": "tool_G02",
+        "name": "tool_G02",
+        "img": "../assets/images/tool_G02.png",
+        "description": "공구상자 (공구상자 2레벨)"
+      },
+      {
+        "id": "tool_G03",
+        "name": "tool_G03",
+        "img": "../assets/images/tool_G03.png",
+        "description": "공구상자 (공구상자 3레벨)"
+      },
+      {
+        "id": "tool_G04",
+        "name": "tool_G04",
+        "img": "../assets/images/tool_G04.png",
+        "description": "공구상자 (공구상자 4레벨)"
+      },
+      {
+        "id": "tool_G05",
+        "name": "tool_G05",
+        "img": "../assets/images/tool_G05.png",
+        "description": "공구상자 (공구상자 5레벨)"
+      },
+      {
+        "id": "tool_G06",
+        "name": "tool_G06",
+        "img": "../assets/images/tool_G06.png",
+        "description": "공구상자 (공구상자 6레벨)"
+      },
+      {
+        "id": "tool_G07",
+        "name": "tool_G07",
+        "img": "../assets/images/tool_G07.png",
+        "description": "공구상자 (공구상자 7레벨)"
+      },
+      {
+        "id": "tool_G08",
+        "name": "tool_G08",
+        "img": "../assets/images/tool_G08.png",
+        "description": "공구상자 (공구상자 8레벨)"
+      },
+      {
+        "id": "tool_G09",
+        "name": "tool_G09",
+        "img": "../assets/images/tool_G09.png",
+        "description": "공구상자 (공구상자 9레벨)"
+      },
+      {
+        "id": "tool_G10",
+        "name": "tool_G10",
+        "img": "../assets/images/tool_G10.png",
+        "description": "공구상자 (공구상자 10레벨)"
       }
     ]
   }
