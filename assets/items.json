@@ -1104,10 +1104,38 @@
     ],
     "보상": [
       {
+        "id": "exp01",
+        "name": "exp01",
+        "img": "../assets/images/exp01.png",
+        "description": "경험치 (경험치 1렙)",
+        "quickQty": true
+      },
+      {
+        "id": "exp02",
+        "name": "exp02",
+        "img": "../assets/images/exp02.png",
+        "description": "경험치 (경험치 2렙)",
+        "quickQty": true
+      },
+      {
+        "id": "exp03",
+        "name": "exp03",
+        "img": "../assets/images/exp03.png",
+        "description": "경험치 (경험치 3렙)",
+        "quickQty": true
+      },
+      {
         "id": "exp04",
         "name": "exp04",
         "img": "../assets/images/exp04.png",
         "description": "경험치 (경험치 4렙)",
+        "quickQty": true
+      },
+      {
+        "id": "exp05",
+        "name": "exp05",
+        "img": "../assets/images/exp05.png",
+        "description": "경험치 (경험치 5렙)",
         "quickQty": true
       },
       {
@@ -1194,34 +1222,6 @@
         "name": "coin_03",
         "img": "../assets/images/coin03.png",
         "description": "20코인 (코인 3레벨)",
-        "quickQty": true
-      },
-      {
-        "id": "exp01",
-        "name": "exp01",
-        "img": "../assets/images/exp01.png",
-        "description": "경험치 (경험치 1렙)",
-        "quickQty": true
-      },
-      {
-        "id": "exp02",
-        "name": "exp02",
-        "img": "../assets/images/exp02.png",
-        "description": "경험치 (경험치 2렙)",
-        "quickQty": true
-      },
-      {
-        "id": "exp03",
-        "name": "exp03",
-        "img": "../assets/images/exp03.png",
-        "description": "경험치 (경험치 3렙)",
-        "quickQty": true
-      },
-      {
-        "id": "exp05",
-        "name": "exp05",
-        "img": "../assets/images/exp05.png",
-        "description": "경험치 (경험치 5렙)",
         "quickQty": true
       },
       {
