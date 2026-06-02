@@ -1139,6 +1139,20 @@
         "quickQty": true
       },
       {
+        "id": "coin_03",
+        "name": "coin_03",
+        "img": "../assets/images/coin03.png",
+        "description": "20코인 (코인 3레벨)",
+        "quickQty": true
+      },
+      {
+        "id": "ruby04",
+        "name": "ruby04",
+        "img": "../assets/images/ruby04.png",
+        "description": "루비 4단계",
+        "quickQty": true
+      },
+      {
         "id": "reward_box_red",
         "name": "reward_box_red",
         "img": "../assets/images/reward_box_red01.png",
@@ -1209,20 +1223,6 @@
         "name": "camera03",
         "img": "../assets/images/camera03.png",
         "description": "카메라 3"
-      },
-      {
-        "id": "ruby04",
-        "name": "ruby04",
-        "img": "../assets/images/ruby04.png",
-        "description": "루비 4단계",
-        "quickQty": true
-      },
-      {
-        "id": "coin_03",
-        "name": "coin_03",
-        "img": "../assets/images/coin03.png",
-        "description": "20코인 (코인 3레벨)",
-        "quickQty": true
       },
       {
         "id": "Reward_chest_blue01",
