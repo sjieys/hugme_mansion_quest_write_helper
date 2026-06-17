@@ -241,13 +241,16 @@ load();
 let dragActive = false;
 let dragCheckValue = false;
 const draggedRows = new Set();
-let blockNextClick = false;
 let suppressMouseClick = false;
+let blockSyntheticMouse = false; // 터치 후 synthetic mouse 이벤트 차단
 let curX = 0, curY = 0;
 let scrollRaf = null;
+// 터치: 탭과 드래그 구분용
+let touchOriginRow = null;
+let touchStartX = 0, touchStartY = 0;
 
-const SCROLL_ZONE = 80;  // 엣지에서 이 범위 안에 들어오면 스크롤 시작
-const SCROLL_MAX  = 12;  // 최대 스크롤 속도 (px/frame)
+const SCROLL_ZONE = 50;  // 엣지에서 이 범위 안에 들어오면 스크롤 시작
+const SCROLL_MAX  = 10;  // 최대 스크롤 속도 (px/frame)
 
 function autoScroll() {
   if (!dragActive) return;
@@ -265,11 +268,13 @@ function autoScroll() {
   scrollRaf = requestAnimationFrame(autoScroll);
 }
 
-function startDrag(cb, row) {
+function startDrag(originRow) {
+  const cb = originRow.querySelector('input[type="checkbox"]');
+  if (!cb) return;
   dragActive = true;
   dragCheckValue = !cb.checked;
   draggedRows.clear();
-  applyDragRow(row);
+  applyDragRow(originRow);
   scrollRaf = requestAnimationFrame(autoScroll);
 }
 
@@ -291,14 +296,13 @@ function applyDragRow(el) {
 
 // ── 마우스 ──
 document.addEventListener('mousedown', e => {
+  if (blockSyntheticMouse) return; // 터치 후 쏘아지는 synthetic mousedown 무시
   const row = e.target.closest('.quest-check[data-key]');
   if (!row) return;
   e.preventDefault();
-  const cb = row.querySelector('input[type="checkbox"]');
-  if (!cb) return;
   curX = e.clientX; curY = e.clientY;
   suppressMouseClick = true;
-  startDrag(cb, row);
+  startDrag(row);
 }, true);
 
 // mousedown에서 직접 토글했으므로 label의 click 기본 동작 차단
@@ -318,33 +322,62 @@ document.addEventListener('mousemove', e => {
 document.addEventListener('mouseup', () => { endDrag(); });
 
 // ── 터치 ──
+// touchstart: 행을 기억만 하고 아직 토글하지 않음 (탭인지 드래그인지 모름)
 document.addEventListener('touchstart', e => {
   const row = e.target.closest('.quest-check[data-key]');
   if (!row) return;
-  const cb = row.querySelector('input[type="checkbox"]');
-  if (!cb) return;
   const t = e.touches[0];
-  curX = t.clientX; curY = t.clientY;
-  startDrag(cb, row);
-  blockNextClick = true;
+  touchOriginRow = row;
+  touchStartX = curX = t.clientX;
+  touchStartY = curY = t.clientY;
 }, { passive: true });
 
+// touchmove: 다른 행으로 이동했을 때 비로소 드래그 모드 진입 → 그 전까지 스크롤 허용
 document.addEventListener('touchmove', e => {
-  if (!dragActive) return;
-  if (e.cancelable) e.preventDefault();
+  if (!touchOriginRow && !dragActive) return;
   const t = e.touches[0];
-  curX = t.clientX; curY = t.clientY;
-  applyDragRow(document.elementFromPoint(curX, curY));
+  curX = t.clientX;
+  curY = t.clientY;
+
+  if (!dragActive && touchOriginRow) {
+    const el = document.elementFromPoint(curX, curY);
+    const newRow = el?.closest('.quest-check[data-key]');
+    if (newRow && newRow !== touchOriginRow) {
+      // 다른 행에 닿은 순간 드래그 모드 시작
+      startDrag(touchOriginRow);
+      touchOriginRow = null;
+    }
+  }
+
+  if (dragActive) {
+    if (e.cancelable) e.preventDefault(); // 드래그 중만 스크롤 방지
+    applyDragRow(document.elementFromPoint(curX, curY));
+  }
 }, { passive: false });
 
+// touchend: 거의 움직이지 않았으면 탭으로 처리, 드래그였으면 종료
 document.addEventListener('touchend', () => {
+  if (touchOriginRow) {
+    const moved = Math.hypot(curX - touchStartX, curY - touchStartY);
+    if (moved < 12) {
+      // 탭: 한 번 토글
+      const cb = touchOriginRow.querySelector('input[type="checkbox"]');
+      if (cb) {
+        cb.checked = !cb.checked;
+        cb.dispatchEvent(new Event('change'));
+      }
+    }
+    touchOriginRow = null;
+  }
   endDrag();
-  setTimeout(() => { blockNextClick = false; }, 300);
+  // 터치 후 브라우저가 쏘는 synthetic mouse 이벤트 차단
+  blockSyntheticMouse = true;
+  setTimeout(() => { blockSyntheticMouse = false; }, 400);
 });
 
-// 터치 후 ghost click 차단
+// 터치 후 synthetic click ghost 차단
 document.addEventListener('click', e => {
-  if (blockNextClick && e.target.closest('.quest-check')) {
+  if (blockSyntheticMouse && e.target.closest('.quest-check')) {
     e.preventDefault();
     e.stopPropagation();
   }
