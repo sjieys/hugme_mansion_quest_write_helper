@@ -158,6 +158,7 @@ function render(posts) {
 
         const row = document.createElement('label');
         row.className = `quest-check${done ? ' done' : ''}`;
+        row.dataset.key = key;
 
         const cb = document.createElement('input');
         cb.type = 'checkbox';
@@ -235,3 +236,116 @@ async function saveProgress() {
 }
 
 load();
+
+// ── 드래그 다중 선택 (PC: mouse / 폰: touch) ─────────────
+let dragActive = false;
+let dragCheckValue = false;
+const draggedRows = new Set();
+let blockNextClick = false;
+let suppressMouseClick = false;
+let curX = 0, curY = 0;
+let scrollRaf = null;
+
+const SCROLL_ZONE = 80;  // 엣지에서 이 범위 안에 들어오면 스크롤 시작
+const SCROLL_MAX  = 12;  // 최대 스크롤 속도 (px/frame)
+
+function autoScroll() {
+  if (!dragActive) return;
+  const vh = window.innerHeight;
+  let speed = 0;
+  if (curY < SCROLL_ZONE) {
+    speed = -SCROLL_MAX * (1 - curY / SCROLL_ZONE);
+  } else if (curY > vh - SCROLL_ZONE) {
+    speed = SCROLL_MAX * (1 - (vh - curY) / SCROLL_ZONE);
+  }
+  if (speed !== 0) {
+    window.scrollBy(0, speed);
+    applyDragRow(document.elementFromPoint(curX, curY));
+  }
+  scrollRaf = requestAnimationFrame(autoScroll);
+}
+
+function startDrag(cb, row) {
+  dragActive = true;
+  dragCheckValue = !cb.checked;
+  draggedRows.clear();
+  applyDragRow(row);
+  scrollRaf = requestAnimationFrame(autoScroll);
+}
+
+function endDrag() {
+  dragActive = false;
+  draggedRows.clear();
+  cancelAnimationFrame(scrollRaf);
+}
+
+function applyDragRow(el) {
+  const row = el?.closest?.('.quest-check[data-key]');
+  if (!row || draggedRows.has(row)) return;
+  draggedRows.add(row);
+  const cb = row.querySelector('input[type="checkbox"]');
+  if (!cb || cb.checked === dragCheckValue) return;
+  cb.checked = dragCheckValue;
+  cb.dispatchEvent(new Event('change'));
+}
+
+// ── 마우스 ──
+document.addEventListener('mousedown', e => {
+  const row = e.target.closest('.quest-check[data-key]');
+  if (!row) return;
+  e.preventDefault();
+  const cb = row.querySelector('input[type="checkbox"]');
+  if (!cb) return;
+  curX = e.clientX; curY = e.clientY;
+  suppressMouseClick = true;
+  startDrag(cb, row);
+}, true);
+
+// mousedown에서 직접 토글했으므로 label의 click 기본 동작 차단
+document.addEventListener('click', e => {
+  if (suppressMouseClick && e.target.closest('.quest-check[data-key]')) {
+    e.preventDefault();
+    suppressMouseClick = false;
+  }
+}, true);
+
+document.addEventListener('mousemove', e => {
+  if (!dragActive) return;
+  curX = e.clientX; curY = e.clientY;
+  applyDragRow(document.elementFromPoint(curX, curY));
+});
+
+document.addEventListener('mouseup', () => { endDrag(); });
+
+// ── 터치 ──
+document.addEventListener('touchstart', e => {
+  const row = e.target.closest('.quest-check[data-key]');
+  if (!row) return;
+  const cb = row.querySelector('input[type="checkbox"]');
+  if (!cb) return;
+  const t = e.touches[0];
+  curX = t.clientX; curY = t.clientY;
+  startDrag(cb, row);
+  blockNextClick = true;
+}, { passive: true });
+
+document.addEventListener('touchmove', e => {
+  if (!dragActive) return;
+  if (e.cancelable) e.preventDefault();
+  const t = e.touches[0];
+  curX = t.clientX; curY = t.clientY;
+  applyDragRow(document.elementFromPoint(curX, curY));
+}, { passive: false });
+
+document.addEventListener('touchend', () => {
+  endDrag();
+  setTimeout(() => { blockNextClick = false; }, 300);
+});
+
+// 터치 후 ghost click 차단
+document.addEventListener('click', e => {
+  if (blockNextClick && e.target.closest('.quest-check')) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}, true);

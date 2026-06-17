@@ -1153,18 +1153,6 @@
         "quickQty": true
       },
       {
-        "id": "reward_box_red",
-        "name": "reward_box_red",
-        "img": "../assets/images/reward_box_red01.png",
-        "description": "소형 빨간 상자"
-      },
-      {
-        "id": "reward_box_blue",
-        "name": "reward_box_blue",
-        "img": "../assets/images/reward_box_blue01.png",
-        "description": "소형 파란 상자"
-      },
-      {
         "id": "reward_scissors",
         "name": "reward_scissors",
         "img": "../assets/images/scissors.png",
