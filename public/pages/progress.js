@@ -237,20 +237,21 @@ async function saveProgress() {
 
 load();
 
-// ── 드래그 다중 선택 (PC: mouse / 폰: touch) ─────────────
+// ── 드래그 다중 선택 (PC: mouse / 폰: 길게 누르고 드래그) ──
 let dragActive = false;
 let dragCheckValue = false;
 const draggedRows = new Set();
 let suppressMouseClick = false;
-let blockSyntheticMouse = false; // 터치 후 synthetic mouse 이벤트 차단
+let blockSyntheticMouse = false;
 let curX = 0, curY = 0;
 let scrollRaf = null;
-// 터치: 탭과 드래그 구분용
-let touchOriginRow = null;
+// 터치 롱프레스 상태
+let longPressTimer = null;
+let longPressRow = null;
 let touchStartX = 0, touchStartY = 0;
 
-const SCROLL_ZONE = 50;  // 엣지에서 이 범위 안에 들어오면 스크롤 시작
-const SCROLL_MAX  = 10;  // 최대 스크롤 속도 (px/frame)
+const SCROLL_ZONE = 50;
+const SCROLL_MAX  = 10;
 
 function autoScroll() {
   if (!dragActive) return;
@@ -294,9 +295,15 @@ function applyDragRow(el) {
   cb.dispatchEvent(new Event('change'));
 }
 
+function cancelLongPress() {
+  clearTimeout(longPressTimer);
+  longPressTimer = null;
+  longPressRow = null;
+}
+
 // ── 마우스 ──
 document.addEventListener('mousedown', e => {
-  if (blockSyntheticMouse) return; // 터치 후 쏘아지는 synthetic mousedown 무시
+  if (blockSyntheticMouse) return;
   const row = e.target.closest('.quest-check[data-key]');
   if (!row) return;
   e.preventDefault();
@@ -305,7 +312,6 @@ document.addEventListener('mousedown', e => {
   startDrag(row);
 }, true);
 
-// mousedown에서 직접 토글했으므로 label의 click 기본 동작 차단
 document.addEventListener('click', e => {
   if (suppressMouseClick && e.target.closest('.quest-check[data-key]')) {
     e.preventDefault();
@@ -321,58 +327,61 @@ document.addEventListener('mousemove', e => {
 
 document.addEventListener('mouseup', () => { endDrag(); });
 
-// ── 터치 ──
-// touchstart: 행을 기억만 하고 아직 토글하지 않음 (탭인지 드래그인지 모름)
+// ── 터치: 탭 = 바로 토글 / 롱프레스(400ms) = 드래그 모드 ──
 document.addEventListener('touchstart', e => {
   const row = e.target.closest('.quest-check[data-key]');
   if (!row) return;
   const t = e.touches[0];
-  touchOriginRow = row;
   touchStartX = curX = t.clientX;
   touchStartY = curY = t.clientY;
+  longPressRow = row;
+
+  longPressTimer = setTimeout(() => {
+    longPressTimer = null;
+    navigator.vibrate?.(40); // 햅틱 피드백 (지원 기기만)
+    startDrag(longPressRow);
+    longPressRow = null;
+  }, 400);
 }, { passive: true });
 
-// touchmove: 다른 행으로 이동했을 때 비로소 드래그 모드 진입 → 그 전까지 스크롤 허용
 document.addEventListener('touchmove', e => {
-  if (!touchOriginRow && !dragActive) return;
   const t = e.touches[0];
   curX = t.clientX;
   curY = t.clientY;
 
-  if (!dragActive && touchOriginRow) {
-    const el = document.elementFromPoint(curX, curY);
-    const newRow = el?.closest('.quest-check[data-key]');
-    if (newRow && newRow !== touchOriginRow) {
-      // 다른 행에 닿은 순간 드래그 모드 시작
-      startDrag(touchOriginRow);
-      touchOriginRow = null;
-    }
+  if (longPressTimer) {
+    // 손가락이 많이 움직이면 스크롤 의도로 판단, 롱프레스 취소
+    const moved = Math.hypot(curX - touchStartX, curY - touchStartY);
+    if (moved > 10) cancelLongPress();
+    return; // 아직 드래그 모드 아님 → 스크롤 허용
   }
 
   if (dragActive) {
-    if (e.cancelable) e.preventDefault(); // 드래그 중만 스크롤 방지
+    if (e.cancelable) e.preventDefault();
     applyDragRow(document.elementFromPoint(curX, curY));
   }
 }, { passive: false });
 
-// touchend: 거의 움직이지 않았으면 탭으로 처리, 드래그였으면 종료
 document.addEventListener('touchend', () => {
-  if (touchOriginRow) {
-    const moved = Math.hypot(curX - touchStartX, curY - touchStartY);
-    if (moved < 12) {
-      // 탭: 한 번 토글
-      const cb = touchOriginRow.querySelector('input[type="checkbox"]');
-      if (cb) {
-        cb.checked = !cb.checked;
-        cb.dispatchEvent(new Event('change'));
-      }
+  if (longPressTimer) {
+    // 롱프레스 전에 손 뗌 = 탭 → 하나 토글
+    cancelLongPress();
+    const row = document.elementFromPoint(curX, curY)?.closest('.quest-check[data-key]')
+      || document.elementFromPoint(touchStartX, touchStartY)?.closest('.quest-check[data-key]');
+    if (row) {
+      const cb = row.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); }
     }
-    touchOriginRow = null;
   }
+  cancelLongPress();
   endDrag();
-  // 터치 후 브라우저가 쏘는 synthetic mouse 이벤트 차단
   blockSyntheticMouse = true;
   setTimeout(() => { blockSyntheticMouse = false; }, 400);
+});
+
+document.addEventListener('touchcancel', () => {
+  cancelLongPress();
+  endDrag();
 });
 
 // 터치 후 synthetic click ghost 차단
